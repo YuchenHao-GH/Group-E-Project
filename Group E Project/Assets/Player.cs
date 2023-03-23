@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb;
     public float horizontalforce; 
     public bool grounded;
+    public bool ramped;
+    private float maxspeed = 7f;
 
     private Vector2 groundNormal = Vector2.up;
     public float maxRotationAngle = 45f;
@@ -19,7 +21,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -28,43 +30,72 @@ public class Player : MonoBehaviour
         horizontalforce = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump") && grounded == true) 
         {
-             rb.AddForce(transform.up * 1200);
+             rb.AddForce(transform.up * 140000);
         }
     }
     void FixedUpdate()
     {
+        Debug.Log(rb.velocity.magnitude);
         LayerMask mask = LayerMask.GetMask("ground");
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 2, mask);
-        rb.AddForce(transform.right * horizontalforce * 20);
+        if (ramped == true)
+        {
+            rb.AddForce(transform.right * 7000);
+        }
+        if(rb.velocity.magnitude <= maxspeed)
+        {
+            rb.AddForce(transform.right * horizontalforce * 1000);
+        }
         //maintain vertical on slope (testing)
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.down);
-        if (hit2.collider != null)
-        {
-            groundNormal = hit2.normal;
-        }
-        float angle = Vector2.Angle(Vector2.up, groundNormal);
-        if (angle > maxRotationAngle)
-        {
-            Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, groundNormal);
-            rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
-        }
-        // tilted center of gravity
-        float tiltAngle = -horizontalforce * tiltSpeed;
-        tiltAngle = Mathf.Clamp(tiltAngle, -maxTiltAngle, maxTiltAngle);
-        transform.rotation = Quaternion.Euler(0f, 0f, tiltAngle);
+        //if (rb.freezeRotation == false)
+       // {
+           // RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.right);
+          //  RaycastHit2D hit3 = Physics2D.Raycast(transform.position, Vector2.down);
+           // rb.rotation = 45;
+            //groundNormal = hit2.normal;
+      
+            
+        //float angle = Vector2.Angle(Vector2.up, groundNormal);
+        //if (angle > maxRotationAngle)
+       // {
+          //  Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, groundNormal);
+         //   rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
+       // }
+        //}
+        // // tilted center of gravity
+        // float tiltAngle = -horizontalforce * tiltSpeed;
+        // tiltAngle = Mathf.Clamp(tiltAngle, -maxTiltAngle, maxTiltAngle);
+        // transform.rotation = Quaternion.Euler(0f, 0f, tiltAngle);
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "ground")
+        if (collider.gameObject.tag == "ground" || collider.gameObject.tag == "ramp")
         {
             grounded = true;
         } 
+        if(collider.gameObject.tag == "ramp")
+        {
+            ramped = true;
+            //rb.freezeRotation = false;
+        }
     }
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "ground")
+        if (collider.gameObject.tag == "ground" || collider.gameObject.tag == "ramp")
         {
             grounded = false;
+           
+        }
+        if(collider.gameObject.tag == "ramp")
+        {
+            ramped = false;
+            //rb.rotation = 0;
+            //rb.freezeRotation = true;
+        }
+        if(collider.gameObject.tag == "ramp")
+        {
+            ramped = false;
         }
     }
+    
 }
