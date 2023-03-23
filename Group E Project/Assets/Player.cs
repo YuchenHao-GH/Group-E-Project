@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         horizontalforce = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump") && grounded == true) 
         {
-             rb.AddForce(transform.up * 1200);
+             rb.AddForce(transform.up * 150000);
         }
     }
     void FixedUpdate()
