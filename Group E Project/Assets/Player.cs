@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     public float horizontalforce; 
     public bool grounded;
     public bool ramped;
-    private float maxspeed = 8;
+    public bool downramped;
+    private float maxspeed = 12f;
     
     private Vector2 groundNormal = Vector2.up;
     public float maxRotationAngle = 45f;
@@ -28,22 +29,39 @@ public class Player : MonoBehaviour
     void Update()
     {
         horizontalforce = Input.GetAxis("Horizontal");
+       
         if (Input.GetButtonDown("Jump") && grounded == true) 
         {
-             rb.AddForce(transform.up * 150000);
+             rb.AddForce(transform.up * 84000);
         }
     }
     void FixedUpdate()
     {
+        
         LayerMask mask = LayerMask.GetMask("ground");
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 2, mask);
+        RaycastHit2D test = Physics2D.Raycast(transform.position, Vector2.down, 2, mask);
+
+        if (test.collider!= null)
+        {
+            grounded = true;
+        }
+        else 
+        {
+            grounded = false;
+        }
+        
         if (ramped == true)
+        {
+            rb.AddForce(transform.right * 7500);
+        }
+        if (downramped == true)
         {
             rb.AddForce(transform.right * 7500);
         }
         if(rb.velocity.magnitude <= maxspeed)
         {
-            rb.AddForce(transform.right * horizontalforce * 1000);
+            rb.AddForce(transform.right * horizontalforce * 500);
         }
         //maintain vertical on slope (testing)
         // RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.down);
@@ -64,29 +82,36 @@ public class Player : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "ground" || collider.gameObject.tag == "ramp")
+        if (collider.gameObject.tag == "ground" || collider.gameObject.tag == "ramp" || collider.gameObject.tag == "downramp")
         {
-            grounded = true;
+           
         } 
-        if(collider.gameObject.tag == "ramp")
+        if(collider.gameObject.tag == "ramp" || collider.gameObject.tag == "downramp")
         {
             ramped = true;
             //rb.freezeRotation = false;
             //rb.rotation = 45;
         }
+        if (collider.gameObject.tag == "downramp")
+        {
+          downramped = true;
+        }
     }
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "ground" || collider.gameObject.tag == "ramp")
+        if (collider.gameObject.tag == "ground" || collider.gameObject.tag == "ramp" || collider.gameObject.tag == "downramp")
         {
-            grounded = false;
+            
         }
-        if(collider.gameObject.tag == "ramp")
+        if(collider.gameObject.tag == "ramp" || collider.gameObject.tag == "downramp")
         {
             ramped = false;
             //rb.rotation = 0;
             //rb.freezeRotation = false;
-            
+        }
+        if (collider.gameObject.tag == "downramp")
+        {
+          downramped = false;
         }
     }
 }

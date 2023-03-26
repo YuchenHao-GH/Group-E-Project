@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ground
   - ramp
+  - downramp
   layers:
   - Default
   - TransparentFX
