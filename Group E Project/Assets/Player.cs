@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     public bool ramped;
     public bool downramped;
     private float maxspeed = 12f;
-    
+    public GameObject mostrecentcheckpoint;
+
+
     private Vector2 groundNormal = Vector2.up;
     public float maxRotationAngle = 45f;
     public float rotationSpeed;
@@ -33,6 +35,11 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Jump") && grounded == true) 
         {
              rb.AddForce(transform.up * 84000);
+        }
+        if (Input.GetButtonDown("Reload"))
+        {
+            rb.velocity = new Vector2(0, 0);
+            transform.position = mostrecentcheckpoint.transform.position;
         }
     }
     void FixedUpdate()
@@ -95,6 +102,10 @@ public class Player : MonoBehaviour
         if (collider.gameObject.tag == "downramp")
         {
           downramped = true;
+        }
+        if (collider.gameObject.tag == "checkpoint")
+        {
+            mostrecentcheckpoint = collider.gameObject;
         }
     }
     void OnTriggerExit2D(Collider2D collider)
