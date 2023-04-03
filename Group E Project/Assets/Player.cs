@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public bool downramped;
     private float maxspeed = 12f;
     public GameObject mostrecentcheckpoint;
+    public int damage = 5;
 
 
     private Vector2 groundNormal = Vector2.up;
