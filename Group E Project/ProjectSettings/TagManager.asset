@@ -8,6 +8,7 @@ TagManager:
   - ramp
   - downramp
   - checkpoint
+  - Enemy
   layers:
   - Default
   - TransparentFX
