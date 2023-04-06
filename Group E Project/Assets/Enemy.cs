@@ -5,8 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed = 2f;
-    public int maxHealth = 10;
-    private int currentHealth;
+    public float maxHealth = 10;
+    private float currentHealth;
 
     private bool isMovingRight = true;
     public float moveDistance = 2f;
@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-         if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             Player player = collision.gameObject.GetComponent<Player>();
             if (player != null)
@@ -58,9 +58,14 @@ public class Enemy : MonoBehaviour
                 TakeDamage(player.damage);
             }
         }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<Player>().TakeDamage(2); 
+        }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)

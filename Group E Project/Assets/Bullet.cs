@@ -6,6 +6,18 @@ public class Bullet : MonoBehaviour
 {
     private int damage;
 
+    public float lifeTime = 5f;
+    private float timer = 0f; 
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= lifeTime)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void SetDamage(int damage)
     {
         this.damage = damage;
