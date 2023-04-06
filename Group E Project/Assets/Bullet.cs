@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= lifeTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
