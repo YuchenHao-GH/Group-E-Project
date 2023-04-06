@@ -11,7 +11,10 @@ public class Player : MonoBehaviour
     public bool downramped;
     private float maxspeed = 12f;
     public GameObject mostrecentcheckpoint;
-    public int damage = 5;
+    public float damage = 5;
+    public float startingHealth = 10;
+    public float currentHealth;
+
 
 
     private Vector2 groundNormal = Vector2.up;
@@ -28,6 +31,26 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Awake()
+    {
+        currentHealth = startingHealth;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -42,6 +65,7 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             transform.position = mostrecentcheckpoint.transform.position;
         }
+
     }
     void FixedUpdate()
     {
@@ -124,6 +148,17 @@ public class Player : MonoBehaviour
         if (collider.gameObject.tag == "downramp")
         {
           downramped = false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Vector2 direction = transform.position - collision.transform.position;
+            float distance = direction.magnitude;
+            float pushForce = 1000f;
+            GetComponent<Rigidbody2D>().AddForce(direction.normalized * pushForce, ForceMode2D.Impulse);
         }
     }
 }

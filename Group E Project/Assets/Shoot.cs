@@ -8,6 +8,7 @@ public class Shoot : MonoBehaviour
     public Transform firePoint; 
     public float bulletSpeed = 10f;
     public int damage = 5;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.J))
