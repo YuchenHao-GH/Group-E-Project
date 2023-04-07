@@ -161,4 +161,13 @@ public class Player : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(direction.normalized * pushForce, ForceMode2D.Impulse);
         }
     }
+    public void AddHealth(float health)
+    {
+        currentHealth += health;
+
+        if (currentHealth > startingHealth)
+        {
+            currentHealth = startingHealth;
+        }
+    }
 }
