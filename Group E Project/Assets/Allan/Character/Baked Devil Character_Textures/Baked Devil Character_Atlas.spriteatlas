@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Baked Devil Character_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 026d1fe998cda4c2b91aecd940230845, type: 3}
+    - {fileID: 2800000, guid: 4e7f8a23ce71940a3abe0a6035078907, type: 3}
+    - {fileID: 2800000, guid: 4e610b0419fef41c98a64aa60974171f, type: 3}
+    - {fileID: 2800000, guid: 8f3c242850bdf4d168718fec4ffdee77, type: 3}
+    - {fileID: 2800000, guid: 9231062373eae499793834d5a24ece4d, type: 3}
+    - {fileID: 2800000, guid: fc95da3b356e24d3db919e0b605febd4, type: 3}
+    - {fileID: 2800000, guid: 89a8597fef7bb48dc8c2e113ee153938, type: 3}
+    - {fileID: 2800000, guid: d1c9bebab33714c438945073e7542141, type: 3}
+    - {fileID: 2800000, guid: ec14237cb5f384fffbc92c310cfb6c24, type: 3}
+    - {fileID: 2800000, guid: fea4ea8b1184b4be4a57c061cd55065f, type: 3}
+    - {fileID: 2800000, guid: b075cc46d61a546b49d4666c3173fc4a, type: 3}
+    - {fileID: 2800000, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: -8395226341229142561, guid: 9231062373eae499793834d5a24ece4d, type: 3}
+  - {fileID: 3945512755767747900, guid: 4e7f8a23ce71940a3abe0a6035078907, type: 3}
+  - {fileID: -5032069814162963849, guid: 4e7f8a23ce71940a3abe0a6035078907, type: 3}
+  - {fileID: -7670438834444436177, guid: 4e610b0419fef41c98a64aa60974171f, type: 3}
+  - {fileID: 2828032271763480184, guid: b075cc46d61a546b49d4666c3173fc4a, type: 3}
+  - {fileID: 8602337822535463475, guid: 8f3c242850bdf4d168718fec4ffdee77, type: 3}
+  - {fileID: 2350632813872090584, guid: 8f3c242850bdf4d168718fec4ffdee77, type: 3}
+  - {fileID: -787564300394146941, guid: 026d1fe998cda4c2b91aecd940230845, type: 3}
+  - {fileID: -4944552721621418197, guid: 026d1fe998cda4c2b91aecd940230845, type: 3}
+  - {fileID: -4066976953478951114, guid: 026d1fe998cda4c2b91aecd940230845, type: 3}
+  - {fileID: -2051806757058933141, guid: d1c9bebab33714c438945073e7542141, type: 3}
+  - {fileID: 4957864613835654088, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: -1822613323893375605, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: 3639646627959288018, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: 4134470982481670237, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: -1263573863819490191, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: 7437712810571523569, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: -583960610714688044, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: -898639053329382019, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: 7458940157792330750, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: 5705251532562227289, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: 1690286288046967238, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: -1399624327711169782, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: -5357680909130784801, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: 6876705376049119537, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: 8961321968670009713, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: -5673618120071735642, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: -6317339052227273607, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: 8889010499501632577, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: 497696812452471379, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: -4202001714812480543, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
+  - {fileID: -2175203871650553333, guid: fc95da3b356e24d3db919e0b605febd4, type: 3}
+  - {fileID: -4923985027491169060, guid: fc95da3b356e24d3db919e0b605febd4, type: 3}
+  - {fileID: -5477068177870721875, guid: fc95da3b356e24d3db919e0b605febd4, type: 3}
+  - {fileID: 5349148180859718544, guid: fc95da3b356e24d3db919e0b605febd4, type: 3}
+  - {fileID: -7255587092214114523, guid: fc95da3b356e24d3db919e0b605febd4, type: 3}
+  - {fileID: 7411425907597164007, guid: fc95da3b356e24d3db919e0b605febd4, type: 3}
+  - {fileID: 3232276068272150754, guid: fea4ea8b1184b4be4a57c061cd55065f, type: 3}
+  - {fileID: -6365657124307431345, guid: fea4ea8b1184b4be4a57c061cd55065f, type: 3}
+  - {fileID: -5488137945350207098, guid: fea4ea8b1184b4be4a57c061cd55065f, type: 3}
+  - {fileID: 4157595169170118822, guid: ec14237cb5f384fffbc92c310cfb6c24, type: 3}
+  - {fileID: -9221563418718373416, guid: 89a8597fef7bb48dc8c2e113ee153938, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Facial Hair
+  - Ear L
+  - Ear R
+  - Eyebrow
+  - Weapon
+  - Eyes B
+  - Eyes F
+  - Armor Upper Arm L
+  - Armor Body
+  - Armor Upper Arm R
+  - Mouth F
+  - Upper Arm L
+  - Lower Arm L
+  - Upper Arm R
+  - Head
+  - Upper Leg R
+  - Neck
+  - Upper Leg L
+  - Hand R 0
+  - Hand R 1
+  - Hand L 0
+  - Hand L 1
+  - Lower Leg L
+  - Lower Leg F
+  - Foot R
+  - Lower Leg R
+  - Body
+  - Foot L
+  - Foot F
+  - Hip
+  - Lower Arm R
+  - Gloves Hand R 0
+  - Gloves Hand R 1
+  - Gloves Hand L 0
+  - Gloves Hand L 1
+  - Gloves Lower Arm L
+  - Gloves Lower Arm R
+  - Pants Upper Leg L
+  - Pants Upper Leg R
+  - Pants Hip
+  - Nose
+  - Hair S
+  m_RenderDataMap: {}
+  m_Tag: Baked Devil Character_Atlas
+  m_IsVariant: 0
