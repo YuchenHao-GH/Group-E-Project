@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             transform.position = mostrecentcheckpoint.transform.position;
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetButtonDown("SwordAttack"))
         {
             Attack();
         }
