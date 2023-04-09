@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public float startingHealth = 10;
     public float currentHealth;
 
+    private Animator animator;
+
 
 
     private Vector2 groundNormal = Vector2.up;
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -55,6 +58,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         horizontalforce = Input.GetAxis("Horizontal");
+   
+        if (horizontalforce > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (horizontalforce < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
        
         if (Input.GetButtonDown("Jump") && grounded == true) 
         {
@@ -64,6 +76,10 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 0);
             transform.position = mostrecentcheckpoint.transform.position;
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Attack();
         }
 
     }
@@ -169,5 +185,9 @@ public class Player : MonoBehaviour
         {
             currentHealth = startingHealth;
         }
+    }
+    void Attack()
+    {
+        animator.SetTrigger("Attack");
     }
 }
