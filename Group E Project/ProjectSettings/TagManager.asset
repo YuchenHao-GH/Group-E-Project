@@ -9,6 +9,7 @@ TagManager:
   - downramp
   - checkpoint
   - Enemy
+  - Sword
   layers:
   - Default
   - TransparentFX
