@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
        
         if (Input.GetButtonDown("Jump") && grounded == true) 
         {
-             rb.AddForce(transform.up * 84000);
+             rb.AddForce(transform.up * 170000);
         }
         if (Input.GetButtonDown("Reload"))
         {
@@ -101,15 +101,15 @@ public class Player : MonoBehaviour
         
         if (ramped == true)
         {
-            rb.AddForce(transform.right * 7500);
+            
         }
         if (downramped == true)
         {
-            rb.AddForce(transform.right * 7500);
+           
         }
         if(rb.velocity.magnitude <= maxspeed)
         {
-            rb.AddForce(transform.right * horizontalforce * 500);
+            rb.AddForce(transform.right * horizontalforce * 800);
         }
         //maintain vertical on slope (testing)
         // RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.down);
