@@ -8,6 +8,8 @@ TagManager:
   - ramp
   - downramp
   - checkpoint
+  - Enemy
+  - Sword
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - ground
   - Water
   - UI
-  - 
+  - Attack
   - 
   - 
   - 

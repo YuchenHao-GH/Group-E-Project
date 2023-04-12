@@ -11,6 +11,12 @@ public class Player : MonoBehaviour
     public bool downramped;
     private float maxspeed = 12f;
     public GameObject mostrecentcheckpoint;
+    public float damage = 5;
+    public float startingHealth = 10;
+    public float currentHealth;
+
+    private Animator animator;
+
 
 
     private Vector2 groundNormal = Vector2.up;
@@ -24,23 +30,58 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Awake()
+    {
+        currentHealth = startingHealth;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
         horizontalforce = Input.GetAxis("Horizontal");
+   
+        if (horizontalforce > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (horizontalforce < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
        
         if (Input.GetButtonDown("Jump") && grounded == true) 
         {
-             rb.AddForce(transform.up * 84000);
+             rb.AddForce(transform.up * 170000);
         }
         if (Input.GetButtonDown("Reload"))
         {
             rb.velocity = new Vector2(0, 0);
             transform.position = mostrecentcheckpoint.transform.position;
         }
+        if (Input.GetButtonDown("SwordAttack"))
+        {
+            Attack();
+        }
+
     }
     void FixedUpdate()
     {
@@ -60,15 +101,15 @@ public class Player : MonoBehaviour
         
         if (ramped == true)
         {
-            rb.AddForce(transform.right * 7500);
+            
         }
         if (downramped == true)
         {
-            rb.AddForce(transform.right * 7500);
+           
         }
         if(rb.velocity.magnitude <= maxspeed)
         {
-            rb.AddForce(transform.right * horizontalforce * 500);
+            rb.AddForce(transform.right * horizontalforce * 800);
         }
         //maintain vertical on slope (testing)
         // RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.down);
@@ -124,5 +165,29 @@ public class Player : MonoBehaviour
         {
           downramped = false;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Vector2 direction = transform.position - collision.transform.position;
+            float distance = direction.magnitude;
+            float pushForce = 1000f;
+            GetComponent<Rigidbody2D>().AddForce(direction.normalized * pushForce, ForceMode2D.Impulse);
+        }
+    }
+    public void AddHealth(float health)
+    {
+        currentHealth += health;
+
+        if (currentHealth > startingHealth)
+        {
+            currentHealth = startingHealth;
+        }
+    }
+    void Attack()
+    {
+        animator.SetTrigger("Attack");
     }
 }
