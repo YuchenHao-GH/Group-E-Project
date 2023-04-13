@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public float startingHealth = 10;
     public float currentHealth;
 
-    private Animator animator;
+    
 
 
 
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -57,6 +57,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("SwordAttack"))
+        {
+            Debug.Log("Hahaha");
+        }
         horizontalforce = Input.GetAxis("Horizontal");
    
         if (horizontalforce > 0)
@@ -188,6 +192,6 @@ public class Player : MonoBehaviour
     }
     void Attack()
     {
-        animator.SetTrigger("Attack");
+        
     }
 }
