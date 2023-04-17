@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public float startingHealth = 10;
     public float currentHealth;
 
-    private Animator animator;
+    
 
 
 
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -57,6 +57,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("SwordAttack"))
+        {
+            Debug.Log("Hahaha");
+        }
         horizontalforce = Input.GetAxis("Horizontal");
    
         if (horizontalforce > 0)
@@ -70,7 +74,7 @@ public class Player : MonoBehaviour
        
         if (Input.GetButtonDown("Jump") && grounded == true) 
         {
-             rb.AddForce(transform.up * 84000);
+             rb.AddForce(transform.up * 170000);
         }
         if (Input.GetButtonDown("Reload"))
         {
@@ -101,15 +105,15 @@ public class Player : MonoBehaviour
         
         if (ramped == true)
         {
-            rb.AddForce(transform.right * 7500);
+            
         }
         if (downramped == true)
         {
-            rb.AddForce(transform.right * 7500);
+           
         }
         if(rb.velocity.magnitude <= maxspeed)
         {
-            rb.AddForce(transform.right * horizontalforce * 500);
+            rb.AddForce(transform.right * horizontalforce * 800);
         }
         //maintain vertical on slope (testing)
         // RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.down);
@@ -188,6 +192,6 @@ public class Player : MonoBehaviour
     }
     void Attack()
     {
-        animator.SetTrigger("Attack");
+        
     }
 }
