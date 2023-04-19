@@ -9,6 +9,11 @@ public class Bullet : MonoBehaviour
     public float lifeTime = 5f;
     private float timer = 0f; 
 
+    private void Start()
+    {
+        //Invoke("DestroyBullet", lifeTime);
+    }
+
     void Update()
     {
         timer += Time.deltaTime;
@@ -35,4 +40,9 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    //private void DestroyBullet()
+    //{
+        //Destroy(gameObject, 0f);
+    //}
 }

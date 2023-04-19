@@ -8,6 +8,12 @@ public class Shoot : MonoBehaviour
     public Transform firePoint; 
     public float bulletSpeed = 10f;
     public int damage = 5;
+    public Transform player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     void Update()
     {
@@ -20,13 +26,16 @@ public class Shoot : MonoBehaviour
     void Fire()
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Vector2 bulletVelocity = firePoint.right * bulletSpeed;
-        bullet.GetComponent<Rigidbody2D>().velocity = bulletVelocity;
+        Vector2 bulletDirection = (Vector2)firePoint.position - (Vector2)player.position;
+        bullet.GetComponent<Rigidbody2D>().velocity = bulletDirection.normalized * bulletSpeed;
+        //Vector2 bulletVelocity = firePoint.right * bulletSpeed;
+        //bullet.GetComponent<Rigidbody2D>().velocity = bulletVelocity;
         Bullet bulletScript = bullet.GetComponent<Bullet>();
         if (bulletScript != null)
         {
             bulletScript.SetDamage(damage);
         }
+        Destroy(bullet, 5f);
        // Destroy(bullet.GetComponent<Rigidbody2D>());
         //bullet.transform.Translate(bulletVelocity * Time.deltaTime, Space.World);
     }
