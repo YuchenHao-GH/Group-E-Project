@@ -38,8 +38,15 @@ public class Enemy : MonoBehaviour
     {
         
         PlayerDistance = Vector2.Distance(this.transform.position, Player.transform.position);
-        if (PlayerDistance <= 10)
+        if (PlayerDistance <= 15)
         {
+            if (this.transform.position.x > Player.transform.position.x)
+            {
+                transform.localRotation = Quaternion.Euler(0, -180, 0);
+            }
+            else {
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(Player.transform.position.x, transform.position.y), 0.005f);
         }
         else {
@@ -108,8 +115,13 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         float PlayerDistances = Vector2.Distance(this.transform.position, Player.transform.position);
-        rb.AddForce(transform.right *PlayerDistances * 700 * -1);
-
+        if (transform.rotation.y == 180)
+        {
+            rb.AddForce(transform.right *PlayerDistances * 500 * 1);
+        }
+        else {
+            rb.AddForce(transform.right *PlayerDistances * 500 * -1);
+        }
         Debug.Log("Damaged!");
         currentHealth -= damage;
         if (currentHealth <= 0)
