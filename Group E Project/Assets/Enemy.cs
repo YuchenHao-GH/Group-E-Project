@@ -117,10 +117,10 @@ public class Enemy : MonoBehaviour
         float PlayerDistances = Vector2.Distance(this.transform.position, Player.transform.position);
         if (transform.rotation.y == 180)
         {
-            rb.AddForce(transform.right *PlayerDistances * 500 * 1);
+            rb.AddForce(transform.right  * 1200 * 1);
         }
         else {
-            rb.AddForce(transform.right *PlayerDistances * 500 * -1);
+            rb.AddForce(transform.right  * 1200 * -1);
         }
         Debug.Log("Damaged!");
         currentHealth -= damage;

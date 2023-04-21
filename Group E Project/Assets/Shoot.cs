@@ -7,7 +7,7 @@ public class Shoot : MonoBehaviour
     public GameObject bulletPrefab; 
     public Transform firePoint; 
     public float bulletSpeed = 10f;
-    public int damage = 5;
+    public int damage = 2;
     public Transform player;
 
     void Start()
@@ -17,7 +17,7 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetButtonDown("Fire"))
         {
             Fire();
         }
@@ -35,7 +35,7 @@ public class Shoot : MonoBehaviour
         {
             bulletScript.SetDamage(damage);
         }
-        Destroy(bullet, 5f);
+        Destroy(bullet, 2f);
        // Destroy(bullet.GetComponent<Rigidbody2D>());
         //bullet.transform.Translate(bulletVelocity * Time.deltaTime, Space.World);
     }
