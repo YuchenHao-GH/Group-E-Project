@@ -7,8 +7,13 @@ public class Shoot : MonoBehaviour
     public GameObject bulletPrefab; 
     public Transform firePoint; 
     public float bulletSpeed = 10f;
-    public int damage = 2;
+    public int damage = 1;
     public Transform player;
+    public float AttackTime = 0;
+    public float MaxAttackTime = 1f;
+    private bool Attack = false;
+    public float Cooldown = 0f;
+    public float CooldownTime = 1f;
 
     void Start()
     {
@@ -17,14 +22,20 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire"))
+        if (Input.GetButtonDown("Fire") || Input.GetAxis("Fire") > 0 && Cooldown >= 0.3)
         {
-            Fire();
+            Fire(); 
+        } 
+        if (Cooldown <= 0.3)
+        {
+            Cooldown+= Time.deltaTime;
         }
+
     }
 
     void Fire()
     {
+        Cooldown = 0;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Vector2 bulletDirection = (Vector2)firePoint.position - (Vector2)player.position;
         bullet.GetComponent<Rigidbody2D>().velocity = bulletDirection.normalized * bulletSpeed;
@@ -35,7 +46,7 @@ public class Shoot : MonoBehaviour
         {
             bulletScript.SetDamage(damage);
         }
-        Destroy(bullet, 2f);
+        Destroy(bullet, 0.5f);
        // Destroy(bullet.GetComponent<Rigidbody2D>());
         //bullet.transform.Translate(bulletVelocity * Time.deltaTime, Space.World);
     }
