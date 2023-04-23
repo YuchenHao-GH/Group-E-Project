@@ -16,7 +16,9 @@ public class Enemy : MonoBehaviour
     public bool Attack;
     public float range = 15;
     public float CooldownTime = 1f;
-     public float Cooldown = 0f;
+    public float Cooldown = 0f;
+    public float Cooldown2 = 0f;
+    public float Cooldown2Time = 0.5f;
     Rigidbody2D rb;
 
 
@@ -56,8 +58,15 @@ public class Enemy : MonoBehaviour
             Move();
         }
         if (PlayerDistance <= 2 && Cooldown >= 2) {
+            Cooldown2+= Time.deltaTime;
+        }
+        if (PlayerDistance > 2)
+        {
+            Cooldown2 = 0;
+        }
+        if (PlayerDistance <= 2 && Cooldown >= 2 && Cooldown2 >= 0.5f)
+        {
             Attack = true;
-           
         }
         if (Attack == true)
         {
