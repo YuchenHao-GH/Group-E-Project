@@ -7,7 +7,7 @@ public class Sword : MonoBehaviour
     Collider2D SwordCollider;
     public int damage = 1;
     public float AttackTime = 0;
-    public float MaxAttackTime = 1f;
+    private float MaxAttackTime = 0.05f;
     private bool Attack = false;
     private Animator anim;
     // Start is called before the first frame update
