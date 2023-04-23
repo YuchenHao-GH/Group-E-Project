@@ -22,11 +22,11 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire") || Input.GetAxis("Fire") > 0 && Cooldown >= 0.3)
+        if (Input.GetButtonDown("Fire") || Input.GetAxis("Fire") > 0 && Cooldown >= 0.7)
         {
             Fire(); 
         } 
-        if (Cooldown <= 0.3)
+        if (Cooldown <= 0.7)
         {
             Cooldown+= Time.deltaTime;
         }
