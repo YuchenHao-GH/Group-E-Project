@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hero Jump_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 66b4c3f66733f46e7b173b2cfe6a4631, type: 3}
+    - {fileID: 2800000, guid: 5c2747bb167404f7db9c56026d1fbdcb, type: 3}
+    - {fileID: 2800000, guid: cdb804b33e96d4aeca8a04f4e4f99e97, type: 3}
+    - {fileID: 2800000, guid: 1a064fbabf0d640dc8e3a4beaad37d74, type: 3}
+    - {fileID: 2800000, guid: 8937ce7d87b2646a4a9fdba060faba10, type: 3}
+    - {fileID: 2800000, guid: 06cf8de1e989e4ea095319ddf475bddb, type: 3}
+    - {fileID: 2800000, guid: 049ffd6599122412c8d44ef3f95c9b18, type: 3}
+    - {fileID: 2800000, guid: 9c591c3cfc39b429284d3e4b7fd992b8, type: 3}
+    - {fileID: 2800000, guid: 8685f895dcdc54d6ba6a29a73644cc78, type: 3}
+    - {fileID: 2800000, guid: bc491b5746f6d40c2ad2a2c595fe0a55, type: 3}
+    - {fileID: 2800000, guid: 7b9961a19cfc24e1da3aca03ede1a0f7, type: 3}
+    - {fileID: 2800000, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 2828032271763480184, guid: 7b9961a19cfc24e1da3aca03ede1a0f7, type: 3}
+  - {fileID: -8395226341229142561, guid: 06cf8de1e989e4ea095319ddf475bddb, type: 3}
+  - {fileID: 3945512755767747900, guid: cdb804b33e96d4aeca8a04f4e4f99e97, type: 3}
+  - {fileID: -5032069814162963849, guid: cdb804b33e96d4aeca8a04f4e4f99e97, type: 3}
+  - {fileID: -9221563418718373416, guid: 049ffd6599122412c8d44ef3f95c9b18, type: 3}
+  - {fileID: 4157595169170118822, guid: 8685f895dcdc54d6ba6a29a73644cc78, type: 3}
+  - {fileID: 4957864613835654088, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: -1822613323893375605, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 3639646627959288018, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 4134470982481670237, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: -1263573863819490191, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 7437712810571523569, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: -583960610714688044, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: -898639053329382019, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 7458940157792330750, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 5705251532562227289, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 1690286288046967238, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: -1399624327711169782, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: -5357680909130784801, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 6876705376049119537, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 8961321968670009713, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: -5673618120071735642, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: -6317339052227273607, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 8889010499501632577, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 497696812452471379, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: -4202001714812480543, guid: d60fafb60e26042499ff6cae1bbff618, type: 3}
+  - {fileID: 2914596143981778896, guid: 66b4c3f66733f46e7b173b2cfe6a4631, type: 3}
+  - {fileID: -1184451281787742672, guid: 66b4c3f66733f46e7b173b2cfe6a4631, type: 3}
+  - {fileID: -787564300394146941, guid: 66b4c3f66733f46e7b173b2cfe6a4631, type: 3}
+  - {fileID: -4944552721621418197, guid: 66b4c3f66733f46e7b173b2cfe6a4631, type: 3}
+  - {fileID: -8199258815149647361, guid: 66b4c3f66733f46e7b173b2cfe6a4631, type: 3}
+  - {fileID: -4066976953478951114, guid: 66b4c3f66733f46e7b173b2cfe6a4631, type: 3}
+  - {fileID: 3232276068272150754, guid: bc491b5746f6d40c2ad2a2c595fe0a55, type: 3}
+  - {fileID: -6365657124307431345, guid: bc491b5746f6d40c2ad2a2c595fe0a55, type: 3}
+  - {fileID: 445985395104545589, guid: bc491b5746f6d40c2ad2a2c595fe0a55, type: 3}
+  - {fileID: -2141553470303897871, guid: bc491b5746f6d40c2ad2a2c595fe0a55, type: 3}
+  - {fileID: -7221323957708701457, guid: bc491b5746f6d40c2ad2a2c595fe0a55, type: 3}
+  - {fileID: -5488137945350207098, guid: bc491b5746f6d40c2ad2a2c595fe0a55, type: 3}
+  - {fileID: -7670438834444436177, guid: 1a064fbabf0d640dc8e3a4beaad37d74, type: 3}
+  - {fileID: 5236627531192744792, guid: 5c2747bb167404f7db9c56026d1fbdcb, type: 3}
+  - {fileID: -8302333284602621314, guid: 5c2747bb167404f7db9c56026d1fbdcb, type: 3}
+  - {fileID: -8256532545452641940, guid: 5c2747bb167404f7db9c56026d1fbdcb, type: 3}
+  - {fileID: -2051806757058933141, guid: 9c591c3cfc39b429284d3e4b7fd992b8, type: 3}
+  - {fileID: 8886045125300913350, guid: 9c591c3cfc39b429284d3e4b7fd992b8, type: 3}
+  - {fileID: 8602337822535463475, guid: 8937ce7d87b2646a4a9fdba060faba10, type: 3}
+  - {fileID: 2350632813872090584, guid: 8937ce7d87b2646a4a9fdba060faba10, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Weapon
+  - Facial Hair
+  - Ear L
+  - Ear R
+  - Hair S
+  - Nose
+  - Upper Arm L
+  - Lower Arm L
+  - Upper Arm R
+  - Head
+  - Upper Leg R
+  - Neck
+  - Upper Leg L
+  - Hand R 0
+  - Hand R 1
+  - Hand L 0
+  - Hand L 1
+  - Lower Leg L
+  - Lower Leg F
+  - Foot R
+  - Lower Leg R
+  - Body
+  - Foot L
+  - Foot F
+  - Hip
+  - Lower Arm R
+  - Armor Lower Arm L
+  - Armor Lower Arm R
+  - Armor Upper Arm L
+  - Armor Body
+  - Armor Neck
+  - Armor Upper Arm R
+  - Pants Upper Leg L
+  - Pants Upper Leg R
+  - Pants Lower Leg R
+  - Pants Lower Leg F
+  - Pants Lower Leg L
+  - Pants Hip
+  - Eyebrow
+  - Boots Foot F
+  - Boots Foot L
+  - Boots Foot R
+  - Mouth F
+  - Mouth B
+  - Eyes B
+  - Eyes F
+  m_RenderDataMap: {}
+  m_Tag: Hero Jump_Atlas
+  m_IsVariant: 0

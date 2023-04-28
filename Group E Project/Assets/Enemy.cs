@@ -14,6 +14,11 @@ public class Enemy : MonoBehaviour
     public float MaxAttackTime = 0.2f;
     public float AttackCooldown = 2.0f;
     public bool Attack;
+    public float range = 15;
+    public float CooldownTime = 1f;
+    public float Cooldown = 0f;
+    public float Cooldown2 = 0f;
+    public float Cooldown2Time = 0.5f;
     Rigidbody2D rb;
 
 
@@ -38,7 +43,7 @@ public class Enemy : MonoBehaviour
     {
         
         PlayerDistance = Vector2.Distance(this.transform.position, Player.transform.position);
-        if (PlayerDistance <= 15)
+        if (PlayerDistance <= range)
         {
             if (this.transform.position.x > Player.transform.position.x)
             {
@@ -52,22 +57,34 @@ public class Enemy : MonoBehaviour
         else {
             Move();
         }
-        if (PlayerDistance <= 2) {
+        if (PlayerDistance <= 2 && Cooldown >= 2) {
+            Cooldown2+= Time.deltaTime;
+        }
+        if (PlayerDistance > 2)
+        {
+            Cooldown2 = 0;
+        }
+        if (PlayerDistance <= 2 && Cooldown >= 2 && Cooldown2 >= 0.5f)
+        {
             Attack = true;
-            Debug.Log("1");
         }
         if (Attack == true)
         {
             AttackCollider.GetComponent<Collider2D>().enabled = true;
+            Cooldown = 0;
             AttackTime += Time.deltaTime;
-            Debug.Log("2");
+            
         }
-        if (AttackTime >= MaxAttackTime)
+        else
         {
-            AttackCollider.GetComponent<Collider2D>().enabled = true;
+            AttackCollider.GetComponent<Collider2D>().enabled = false;
             AttackTime = 0;
             Attack = false;
-            Debug.Log("3");
+            
+        }
+        if (Cooldown <= 2)
+        {
+            Cooldown+= Time.deltaTime;
         }
     }
 
@@ -117,10 +134,10 @@ public class Enemy : MonoBehaviour
         float PlayerDistances = Vector2.Distance(this.transform.position, Player.transform.position);
         if (transform.rotation.y == 180)
         {
-            rb.AddForce(transform.right *PlayerDistances * 500 * 1);
+            rb.AddForce(transform.right  * 36000 * 1);
         }
         else {
-            rb.AddForce(transform.right *PlayerDistances * 500 * -1);
+            rb.AddForce(transform.right  * 36000 * -1);
         }
         Debug.Log("Damaged!");
         currentHealth -= damage;

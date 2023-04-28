@@ -57,10 +57,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("SwordAttack"))
-        {
-            Debug.Log("Hahaha");
-        }
+        
         horizontalforce = Input.GetAxis("Horizontal");
    
         if (horizontalforce > 0)
@@ -74,7 +71,7 @@ public class Player : MonoBehaviour
        
         if (Input.GetButtonDown("Jump") && grounded == true) 
         {
-             rb.AddForce(transform.up * 170000);
+             rb.AddForce(transform.up * 120000);
         }
         if (Input.GetButtonDown("Reload"))
         {

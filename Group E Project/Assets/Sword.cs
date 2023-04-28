@@ -7,7 +7,7 @@ public class Sword : MonoBehaviour
     Collider2D SwordCollider;
     public int damage = 1;
     public float AttackTime = 0;
-    public float MaxAttackTime = 1f;
+    private float MaxAttackTime = 0.05f;
     private bool Attack = false;
     private Animator anim;
     // Start is called before the first frame update
@@ -32,7 +32,7 @@ public class Sword : MonoBehaviour
             SwordCollider.enabled = true;
             AttackTime += Time.deltaTime;
             anim.SetBool("Attack", true);
-            Debug.Log("2");
+            
         }
         if (AttackTime >= MaxAttackTime)
         {
@@ -40,7 +40,7 @@ public class Sword : MonoBehaviour
             SwordCollider.enabled = false;
             AttackTime = 0;
             Attack = false;
-            Debug.Log("3");
+            
         }
     }
     void OnTriggerEnter2D(Collider2D collider)
