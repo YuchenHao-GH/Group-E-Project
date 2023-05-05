@@ -2,153 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
-    public float speed = 2f;
-    public float maxHealth = 10;
-    private float currentHealth;
-    public GameObject Player;
-    public GameObject AttackCollider;
-    public float PlayerDistance;
-    public float AttackTime = 0;
-    public float MaxAttackTime = 0.2f;
-    public float AttackCooldown = 2.0f;
-    public bool Attack;
-    public float range = 15;
-    public float CooldownTime = 1f;
-    public float Cooldown = 0f;
-    public float Cooldown2 = 0f;
-    public float Cooldown2Time = 0.5f;
-    Rigidbody2D rb;
-
-
-    private bool isMovingRight = true;
-    public float moveDistance = 2f;
-
-    private Vector3 originalPosition;
-    private float minX;
-    private float maxX;
-
-    private void Start()
+    public float health;
+    public float damage;
+    public float flashTime;
+    private SpriteRenderer sr;
+    private Color originalColor;
+    // Start is called before the first frame update
+    public void Start()
     {
-        currentHealth = maxHealth;
-        originalPosition = transform.position;
-        minX = originalPosition.x - moveDistance;
-        maxX = originalPosition.x + moveDistance;
-        AttackCollider.GetComponent<Collider2D>().enabled = false;
-        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color;
     }
 
-    private void Update()
+    // Update is called once per frame
+    public void Update()
     {
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
         
-        PlayerDistance = Vector2.Distance(this.transform.position, Player.transform.position);
-        if (PlayerDistance <= range)
-        {
-            if (this.transform.position.x > Player.transform.position.x)
-            {
-                transform.localRotation = Quaternion.Euler(0, -180, 0);
-            }
-            else {
-                transform.localRotation = Quaternion.Euler(0, 0, 0);
-            }
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(Player.transform.position.x, transform.position.y), 0.005f);
-        }
-        else {
-            Move();
-        }
-        if (PlayerDistance <= 2 && Cooldown >= 2) {
-            Cooldown2+= Time.deltaTime;
-        }
-        if (PlayerDistance > 2)
-        {
-            Cooldown2 = 0;
-        }
-        if (PlayerDistance <= 2 && Cooldown >= 2 && Cooldown2 >= 0.5f)
-        {
-            Attack = true;
-        }
-        if (Attack == true)
-        {
-            AttackCollider.GetComponent<Collider2D>().enabled = true;
-            Cooldown = 0;
-            AttackTime += Time.deltaTime;
-            
-        }
-        else
-        {
-            AttackCollider.GetComponent<Collider2D>().enabled = false;
-            AttackTime = 0;
-            Attack = false;
-            
-        }
-        if (Cooldown <= 2)
-        {
-            Cooldown+= Time.deltaTime;
-        }
-    }
-
-    private void Move()
-    {
-        if (isMovingRight)
-        {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-            if (transform.position.x > maxX)
-            {
-                isMovingRight = false;
-                
-            }
-        }
-        else
-        {
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
-            transform.Translate(Vector2.left * speed * Time.deltaTime * -1);
-            if (transform.position.x < minX)
-            {
-                isMovingRight = true;
-                
-            }
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // if (collision.gameObject.tag == "Player")
-        // {
-        //     Player player = collision.gameObject.GetComponent<Player>();
-        //     if (player != null)
-        //     {
-        //         TakeDamage(player.damage);
-        //     }
-        // }
-
-        // if (collision.gameObject.CompareTag("Player"))
-        // {
-        //     collision.gameObject.GetComponent<Player>().TakeDamage(2); 
-        // }
     }
 
     public void TakeDamage(float damage)
     {
-        float PlayerDistances = Vector2.Distance(this.transform.position, Player.transform.position);
-        if (transform.rotation.y == 180)
-        {
-            rb.AddForce(transform.right  * 36000 * 1);
-        }
-        else {
-            rb.AddForce(transform.right  * 36000 * -1);
-        }
-        Debug.Log("Damaged!");
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        health -= damage;
+        FlashColor(flashTime);
     }
 
-    private void Die()
+    public void FlashColor(float time)
     {
-        Destroy(gameObject);
+        sr.color = Color.red;
+        Invoke("ResetColor",time);
+    }
+
+    public void ResetColor()
+    {
+        sr.color = originalColor;
     }
 }
