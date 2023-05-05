@@ -14,7 +14,12 @@ public class Player : MonoBehaviour
     public float damage = 5;
     public float startingHealth = 10;
     public float currentHealth;
-
+    public Animator animator;
+    public float speed = 0.5f;
+    public float jumpSpeed;
+    public float runSpeed = 5.0f;
+    private BoxCollider2D playerFeet;
+    private bool isGround;
     
 
 
@@ -32,6 +37,8 @@ public class Player : MonoBehaviour
     {
         
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        playerFeet = GetComponent<BoxCollider2D>();
     }
 
     private void Awake()
@@ -57,30 +64,45 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Flip();
+        Run();
+        Jump();
+        CheckGrounded();
+        SwitchAnimation();
         
-        horizontalforce = Input.GetAxis("Horizontal");
-   
-        if (horizontalforce > 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (horizontalforce < 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
+    
+        //if (horizontalforce > 0)
+        //{
+            //transform.localScale = new Vector3(1, 1, 1);
+        //}
+        //else if (horizontalforce < 0)
+        //{
+            //transform.localScale = new Vector3(-1, 1, 1);
+        //}
        
-        if (Input.GetButtonDown("Jump") && grounded == true) 
-        {
-             rb.AddForce(transform.up * 120000);
-        }
+        //if (Input.GetButtonDown("Jump") && grounded == true) 
+        //{
+            //rb.AddForce(transform.up * 120000);
+            //rb.velocity = new Vector2(rb.velocity.y,speed);
+            //animator.SetBool("IsRun", true);
+        //}
         if (Input.GetButtonDown("Reload"))
         {
             rb.velocity = new Vector2(0, 0);
             transform.position = mostrecentcheckpoint.transform.position;
         }
-        if (Input.GetButtonDown("SwordAttack"))
+        //if (Input.GetButtonDown("SwordAttack"))
+        //{
+            //Attack();
+        //}
+
+        if (horizontalInput != 0)
         {
-            Attack();
+            animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
         }
 
     }
@@ -90,6 +112,8 @@ public class Player : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("ground");
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 2, mask);
         RaycastHit2D test = Physics2D.Raycast(transform.position, Vector2.down, 2, mask);
+        //bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+        //animator.SetBool("IsRun", plyerHasXAxisSpeed);
 
         if (test.collider!= null)
         {
@@ -110,7 +134,7 @@ public class Player : MonoBehaviour
         }
         if(rb.velocity.magnitude <= maxspeed)
         {
-            rb.AddForce(transform.right * horizontalforce * 800);
+            //rb.AddForce(transform.right * horizontalforce * 800);
         }
         //maintain vertical on slope (testing)
         // RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.down);
@@ -129,6 +153,68 @@ public class Player : MonoBehaviour
         // tiltAngle = Mathf.Clamp(tiltAngle, -maxTiltAngle, maxTiltAngle);
         // transform.rotation = Quaternion.Euler(0f, 0f, tiltAngle);
     }
+
+    void CheckGrounded()
+    {
+        isGround = playerFeet.IsTouchingLayers(LayerMask.GetMask("ground"));
+    }
+
+    void Flip()
+    {
+        bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+        if(plyerHasXAxisSpeed)
+        {
+            if(rb.velocity.x > 0.1f)
+            {
+                transform.localRotation = Quaternion.Euler(0,0,0);
+            }
+            if(rb.velocity.x <  -0.1f)
+            {
+                transform.localRotation = Quaternion.Euler(0,180,0);
+            }
+        }
+    }
+
+    void Run()
+    {
+        float moveDir = Input.GetAxis("Horizontal");
+        Vector2 playerVel = new Vector2(moveDir * runSpeed, rb.velocity.y);
+        rb.velocity = playerVel;
+        bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+        animator.SetBool("IsRun", plyerHasXAxisSpeed);
+    }
+
+    void Jump()
+    {
+        if(Input.GetButtonDown("Jump"))
+        {
+            if(isGround)
+            {
+                animator.SetBool("IsJump", true);
+                Vector2 jumpVel = new Vector2(0.0f, jumpSpeed);
+                rb.velocity = Vector2.up *jumpVel;
+            }
+        }
+    }
+
+    void SwitchAnimation()
+    {
+        animator.SetBool("IsIdle", false);
+        if(animator.GetBool("IsJump"))
+        {
+            if(rb.velocity.y < 0.0f)
+            {
+                animator.SetBool("IsJump", false);
+                animator.SetBool("IsFall", true);
+            }
+        }
+        else if(isGround)
+        {
+            animator.SetBool("IsFall", false);
+            animator.SetBool("IsIdle", true);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "ground" || collider.gameObject.tag == "ramp" || collider.gameObject.tag == "downramp")
