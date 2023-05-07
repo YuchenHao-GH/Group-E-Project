@@ -48,10 +48,12 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        animator.SetBool("IsHit", true);
         currentHealth -= damage;
 
         if (currentHealth <= 0)
         {
+            animator.SetBool("IsDie", true);
             Die();
         }
     }
@@ -91,19 +93,6 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             transform.position = mostrecentcheckpoint.transform.position;
         }
-        //if (Input.GetButtonDown("SwordAttack"))
-        //{
-            //Attack();
-        //}
-
-        if (horizontalInput != 0)
-        {
-            animator.SetBool("IsWalking", true);
-        }
-        else
-        {
-            animator.SetBool("IsWalking", false);
-        }
 
     }
     void FixedUpdate()
@@ -112,8 +101,6 @@ public class Player : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("ground");
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 2, mask);
         RaycastHit2D test = Physics2D.Raycast(transform.position, Vector2.down, 2, mask);
-        //bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
-        //animator.SetBool("IsRun", plyerHasXAxisSpeed);
 
         if (test.collider!= null)
         {
@@ -178,10 +165,25 @@ public class Player : MonoBehaviour
     void Run()
     {
         float moveDir = Input.GetAxis("Horizontal");
-        Vector2 playerVel = new Vector2(moveDir * runSpeed, rb.velocity.y);
-        rb.velocity = playerVel;
         bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
-        animator.SetBool("IsRun", plyerHasXAxisSpeed);
+        Vector2 playerVel = new Vector2(moveDir * runSpeed, rb.velocity.y);
+        rb.velocity += playerVel * Time.deltaTime;
+        if(rb.velocity.x < 2f && rb.velocity.x > -2f)
+        {
+            animator.SetBool("IsWalk", plyerHasXAxisSpeed);
+            animator.SetBool("IsRun", false);
+        }
+        else if(rb.velocity.x > 2f || rb.velocity.x < -2f)
+        {
+            animator.SetBool("IsRun", plyerHasXAxisSpeed);
+            animator.SetBool("IsWalk", false);
+        }
+        if(moveDir == 0)
+        {
+            animator.SetBool("IsRun", false);
+            animator.SetBool("IsWalk", false);
+            animator.SetBool("IsIdle", true);
+        }
     }
 
     void Jump()
@@ -191,8 +193,10 @@ public class Player : MonoBehaviour
             if(isGround)
             {
                 animator.SetBool("IsJump", true);
-                Vector2 jumpVel = new Vector2(0.0f, jumpSpeed);
-                rb.velocity = Vector2.up *jumpVel;
+                float moveDir = Input.GetAxis("Horizontal");
+                Vector2 jumpVel = new Vector2(moveDir * rb.velocity.x, jumpSpeed);
+                //Vector2 jumpVel = new Vector2(0.0f, jumpSpeed);
+                rb.velocity = jumpVel;
             }
         }
     }
