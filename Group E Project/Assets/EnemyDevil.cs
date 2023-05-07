@@ -23,6 +23,15 @@ public class EnemyDevil : Enemy
     {
         base.Update();
         transform.position = Vector2.MoveTowards(transform.position, movePos.position, speed * Time.deltaTime);
+        Vector2 diff = movePos.position - transform.position;
+        if (diff.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (diff.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
         if(Vector2.Distance(transform.position, movePos.position) < 0.1f)
         {
             if(waitTime <= 0)
