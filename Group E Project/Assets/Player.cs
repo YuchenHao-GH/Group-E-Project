@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     public float runSpeed = 5.0f;
     private BoxCollider2D playerFeet;
     private bool isGround;
-    
 
 
 
@@ -56,6 +55,17 @@ public class Player : MonoBehaviour
             animator.SetBool("IsDie", true);
             Die();
         }
+        else
+        {
+            StartCoroutine(ChangeState());
+        }
+    }
+
+    IEnumerator ChangeState()
+    {
+        yield return new WaitForSeconds(1f);
+        animator.SetBool("IsHit", false);
+        animator.SetBool("IsIdle", true);
     }
 
     private void Die()
@@ -268,6 +278,7 @@ public class Player : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(direction.normalized * pushForce, ForceMode2D.Impulse);
         }
     }
+
     public void AddHealth(float health)
     {
         currentHealth += health;
