@@ -52,13 +52,21 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            animator.SetBool("IsDie", true);
-            Die();
+            StartCoroutine(DisableHit());
         }
         else
         {
             StartCoroutine(ChangeState());
         }
+    }
+
+    IEnumerator DisableHit()
+    {
+        Debug.Log("Yes!");
+        animator.SetTrigger("Die");
+        yield return new WaitForSeconds(2f);
+        Die();
+        //Invoke("Die", 1f);
     }
 
     IEnumerator ChangeState()

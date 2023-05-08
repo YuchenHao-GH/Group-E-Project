@@ -752,7 +752,6 @@ MonoBehaviour:
   speed: 10
   jumpSpeed: 6
   runSpeed: 5
-  knockbackForce: 10
   maxRotationAngle: 45
   rotationSpeed: 0
   tiltSpeed: 20
