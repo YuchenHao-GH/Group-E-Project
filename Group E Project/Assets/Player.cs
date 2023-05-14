@@ -192,7 +192,6 @@ public class Player : MonoBehaviour
     {
         
         float moveDir = Input.GetAxis("Horizontal");
-        Debug.Log(moveDir);
         bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         if(rb.velocity.magnitude <= maxspeed)
         {
@@ -258,7 +257,7 @@ public class Player : MonoBehaviour
         {
             if(isGround)
             {
-                rb.AddForce(Vector2.up * 2400, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * 2450, ForceMode2D.Impulse);
                 animator.SetBool("IsJump", true);
                 
                 //Vector2 jumpVel = new Vector2(0.0f, jumpSpeed);
@@ -333,7 +332,7 @@ public class Player : MonoBehaviour
         {
             Vector2 direction = transform.position - collision.transform.position;
             float distance = direction.magnitude;
-            float pushForce = 1000f;
+            float pushForce = 500f;
             GetComponent<Rigidbody2D>().AddForce(direction.normalized * pushForce, ForceMode2D.Impulse);
         }
     }

@@ -7,6 +7,8 @@ public class EnemyAttack : MonoBehaviour
     Collider2D AttackCollider;
     public float Cooldown = 0;
     private Animator animator;
+    public GameObject player;
+    public float test;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +19,17 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        test = Vector2.Distance(player.transform.position, transform.position);
         animator.SetBool("Walking", true);
-        if (Cooldown <= 1)
+        if (test <= 10 && test >= -10)
+        {
+        if (Cooldown <= 3)
         {
             Cooldown += Time.deltaTime;
+        }
+        }
+        else {
+            Cooldown = 0;
         }
     }
     void OnTriggerEnter2D(Collider2D collider)
@@ -29,12 +38,13 @@ public class EnemyAttack : MonoBehaviour
         {
             Debug.Log("Fortnite");
             Player player = collider.gameObject.GetComponent<Player>();
-            if (player != null && Cooldown >= 1)
+            if (player != null && Cooldown >= 3)
             {
+                   Debug.Log("?!?!?!?!");
                 animator.SetBool("Walking", false);
                 Cooldown = 0;
                 animator.SetTrigger("Attack");
-                player.TakeDamage(2f);   
+                player.TakeDamage(1f);   
             }
         }
     }
