@@ -6,15 +6,18 @@ public class EnemyAttack : MonoBehaviour
 {
     Collider2D AttackCollider;
     public float Cooldown = 0;
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         AttackCollider = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        animator.SetBool("Walking", true);
         if (Cooldown <= 1)
         {
             Cooldown += Time.deltaTime;
@@ -28,8 +31,10 @@ public class EnemyAttack : MonoBehaviour
             Player player = collider.gameObject.GetComponent<Player>();
             if (player != null && Cooldown >= 1)
             {
+                animator.SetBool("Walking", false);
                 Cooldown = 0;
-                player.TakeDamage(2f);
+                animator.SetTrigger("Attack");
+                player.TakeDamage(2f);   
             }
         }
     }

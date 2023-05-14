@@ -17,10 +17,9 @@ public class Player : MonoBehaviour
     public Animator animator;
     public float speed = 0.5f;
     public float jumpSpeed;
-    public float runSpeed = 5.0f;
+    public float runSpeed = 100.0f;
     private BoxCollider2D playerFeet;
     private bool isGround;
-
 
 
     private Vector2 groundNormal = Vector2.up;
@@ -30,7 +29,7 @@ public class Player : MonoBehaviour
     public float tiltSpeed = 20f;
     public float maxTiltAngle = 45f;
     private float horizontalInput;
-
+    private AnimatorControllerParameter[] animationCParameter;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +37,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerFeet = GetComponent<BoxCollider2D>();
+        int parameters = animator.parameterCount;
+        animationCParameter = new AnimatorControllerParameter[parameters];
     }
 
     private void Awake()
@@ -45,9 +46,19 @@ public class Player : MonoBehaviour
         currentHealth = startingHealth;
     }
 
+    // public void RemoveAnimations()
+    // {
+        
+    // {
+    //     foreach(AnimatorControllerParameter p in animationCParameter)
+    //     {
+    //         animator.SetBool(p.name, false);
+    //     }
+    // }
+    // }
     public void TakeDamage(float damage)
     {
-        animator.SetBool("IsHit", true);
+        animator.SetTrigger("IsHit");
         currentHealth -= damage;
 
         if (currentHealth <= 0)
@@ -72,8 +83,7 @@ public class Player : MonoBehaviour
     IEnumerator ChangeState()
     {
         yield return new WaitForSeconds(1f);
-        animator.SetBool("IsHit", false);
-        animator.SetBool("IsIdle", true);
+        
     }
 
     private void Die()
@@ -89,6 +99,7 @@ public class Player : MonoBehaviour
         Jump();
         CheckGrounded();
         SwitchAnimation();
+        
         
     
         //if (horizontalforce > 0)
@@ -135,7 +146,11 @@ public class Player : MonoBehaviour
         }
         if (downramped == true)
         {
-           
+           animator.SetBool("IsRun", false);
+           animator.SetBool("IsWalk", false);
+            animator.SetBool("IsIdle", false);
+
+           animator.SetBool("IsSliding", true);
         }
         if(rb.velocity.magnitude <= maxspeed)
         {
@@ -169,37 +184,70 @@ public class Player : MonoBehaviour
         bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         if(plyerHasXAxisSpeed)
         {
-            if(rb.velocity.x > 0.1f)
-            {
-                transform.localRotation = Quaternion.Euler(0,0,0);
-            }
-            if(rb.velocity.x <  -0.1f)
-            {
-                transform.localRotation = Quaternion.Euler(0,180,0);
-            }
+           
         }
     }
 
     void Run()
     {
+        
         float moveDir = Input.GetAxis("Horizontal");
+        Debug.Log(moveDir);
         bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
-        Vector2 playerVel = new Vector2(moveDir * runSpeed, rb.velocity.y);
-        rb.velocity += playerVel * Time.deltaTime;
-        if(rb.velocity.x < 2f && rb.velocity.x > -2f)
+        if(rb.velocity.magnitude <= maxspeed)
         {
-            animator.SetBool("IsWalk", plyerHasXAxisSpeed);
-            animator.SetBool("IsRun", false);
+            rb.AddForce(transform.right * moveDir * 100);
         }
-        else if(rb.velocity.x > 2f || rb.velocity.x < -2f)
+         if (moveDir > 0)
         {
-            animator.SetBool("IsRun", plyerHasXAxisSpeed);
-            animator.SetBool("IsWalk", false);
-        }
-        if(moveDir == 0)
+            transform.localScale = new Vector3(1, 1, 1);
+            if(rb.velocity.x < 2f && rb.velocity.x > -2f && (moveDir > 0 || moveDir < 0))
         {
             animator.SetBool("IsRun", false);
+           animator.SetBool("IsSliding", false);
+            animator.SetBool("IsIdle", false);
+            animator.SetBool("IsWalk", true);
+        }
+
+        else if(rb.velocity.x > 2f || rb.velocity.x < -2f && (moveDir > 0 || moveDir < 0))
+        {
+        animator.SetBool("IsSliding", false);
+           animator.SetBool("IsWalk", false);
+            animator.SetBool("IsIdle", false);
+            animator.SetBool("IsRun", true);
+        }
+        }
+        else if (moveDir < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+            if(rb.velocity.x < 2f && rb.velocity.x > -2f && (moveDir > 0 || moveDir < 0))
+        {
+            animator.SetBool("IsRun", false);
+           animator.SetBool("IsSliding", false);
+            animator.SetBool("IsIdle", false);
+            animator.SetBool("IsWalk", true);
+        }
+
+        else if(rb.velocity.x > 2f || rb.velocity.x < -2f && (moveDir > 0 || moveDir < 0))
+        {
+        animator.SetBool("IsSliding", false);
+           animator.SetBool("IsWalk", false);
+            animator.SetBool("IsIdle", false);
+            animator.SetBool("IsRun", true);
+        }
+        }
+        else if (moveDir == 0 && rb.velocity.x != 0)
+        {
+            animator.SetBool("IsRun", false);
+            animator.SetBool("IsIdle", false);
             animator.SetBool("IsWalk", false);
+            animator.SetBool("IsSliding", true);
+        }
+        else
+        {
+          animator.SetBool("IsRun", false);
+           animator.SetBool("IsWalk", false);
+            animator.SetBool("IsSliding", false);
             animator.SetBool("IsIdle", true);
         }
     }
@@ -210,18 +258,16 @@ public class Player : MonoBehaviour
         {
             if(isGround)
             {
+                rb.AddForce(Vector2.up * 2400, ForceMode2D.Impulse);
                 animator.SetBool("IsJump", true);
-                float moveDir = Input.GetAxis("Horizontal");
-                Vector2 jumpVel = new Vector2(moveDir * rb.velocity.x, jumpSpeed);
+                
                 //Vector2 jumpVel = new Vector2(0.0f, jumpSpeed);
-                rb.velocity = jumpVel;
             }
         }
     }
 
     void SwitchAnimation()
     {
-        animator.SetBool("IsIdle", false);
         if(animator.GetBool("IsJump"))
         {
             if(rb.velocity.y < 0.0f)
@@ -233,7 +279,7 @@ public class Player : MonoBehaviour
         else if(isGround)
         {
             animator.SetBool("IsFall", false);
-            animator.SetBool("IsIdle", true);
+            
         }
     }
 
@@ -256,6 +302,11 @@ public class Player : MonoBehaviour
         if (collider.gameObject.tag == "checkpoint")
         {
             mostrecentcheckpoint = collider.gameObject;
+        }
+        if (collider.gameObject.tag== "ReloadZone")
+        {
+            rb.velocity = new Vector2(0, 0);
+            transform.position = mostrecentcheckpoint.transform.position;
         }
     }
     void OnTriggerExit2D(Collider2D collider)
