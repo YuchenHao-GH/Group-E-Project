@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public bool grounded;
     public bool ramped;
     public bool downramped;
-    private float maxspeed = 40f;
+    private float maxspeed = 25f;
     public GameObject mostrecentcheckpoint;
     public float damage = 5;
     public float startingHealth = 10;
@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     public Animator animator;
     public float speed = 0.5f;
     public float jumpSpeed;
-    public float runSpeed = 250.0f;
+    public float runSpeed = 550.0f;
     private BoxCollider2D playerFeet;
     private bool isGround;
 
