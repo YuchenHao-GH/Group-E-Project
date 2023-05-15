@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public bool grounded;
     public bool ramped;
     public bool downramped;
-    private float maxspeed = 25f;
+    private float maxspeed = 15f;
     public GameObject mostrecentcheckpoint;
     public float damage = 5;
     public float startingHealth = 10;
