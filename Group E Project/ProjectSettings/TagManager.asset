@@ -10,6 +10,7 @@ TagManager:
   - checkpoint
   - Enemy
   - Sword
+  - ReloadZone
   layers:
   - Default
   - TransparentFX

@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public float health;
     public float damage;
     public float flashTime;
-    private SpriteRenderer sr;
     private Color originalColor;
     private Player playerHealth;
+     private Rigidbody2D rb;
     // Start is called before the first frame update
     public void Start()
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        sr = GetComponent<SpriteRenderer>();
-        originalColor = sr.color;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -31,19 +30,18 @@ public abstract class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        FlashColor(flashTime);
     }
-
-    public void FlashColor(float time)
+    public void Knockback(int direction)
     {
-        sr.color = Color.red;
-        Invoke("ResetColor",time);
+        rb.AddForce(Vector2.right * 20000 * direction);
     }
-
-    public void ResetColor()
+    public void SwordKnockback (int direction)
     {
-        sr.color = originalColor;
+        rb.AddForce(Vector2.right * 10000 * direction);
     }
+  
+
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
