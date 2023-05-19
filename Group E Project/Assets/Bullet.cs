@@ -36,6 +36,13 @@ public class Bullet : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
+                if (transform.position.x > enemy.transform.position.x)
+                {
+                    enemy.Knockback(-1);
+                }
+                else {
+                    enemy.Knockback(1);
+                }
             }
             Destroy(gameObject);
         }

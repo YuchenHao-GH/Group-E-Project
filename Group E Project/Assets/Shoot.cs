@@ -6,7 +6,7 @@ public class Shoot : MonoBehaviour
 {
     public GameObject bulletPrefab; 
     public Transform firePoint; 
-    public float bulletSpeed = 10f;
+    public float bulletSpeed = 1000f;
     public int damage = 1;
     public Transform player;
     public float AttackTime = 0;
@@ -22,11 +22,11 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire") || Input.GetAxis("Fire") > 0 && Cooldown >= 0.7)
+        if ((Input.GetButtonDown("Fire") || Input.GetAxis("Fire") > 0) && Cooldown >= 5)
         {
             Fire(); 
         } 
-        if (Cooldown <= 0.7)
+        if (Cooldown <= 5)
         {
             Cooldown+= Time.deltaTime;
         }
@@ -46,7 +46,7 @@ public class Shoot : MonoBehaviour
         {
             bulletScript.SetDamage(damage);
         }
-        Destroy(bullet, 0.5f);
+        Destroy(bullet, 0.3f);
        // Destroy(bullet.GetComponent<Rigidbody2D>());
         //bullet.transform.Translate(bulletVelocity * Time.deltaTime, Space.World);
     }
