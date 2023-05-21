@@ -19,6 +19,7 @@ TagManager:
   - Water
   - UI
   - Attack
+  - Player
   - 
   - 
   - 
@@ -41,8 +42,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - TriggerBox
   - Background
   m_SortingLayers:
   - name: Default

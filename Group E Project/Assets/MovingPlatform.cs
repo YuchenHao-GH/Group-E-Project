@@ -48,6 +48,7 @@ public class MovingPlatform : MonoBehaviour
         if(other.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.BoxCollider2D")
         {
             other.gameObject.transform.parent = gameObject.transform;
+            
         }
     }
 
@@ -56,6 +57,7 @@ public class MovingPlatform : MonoBehaviour
         if(other.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.BoxCollider2D")
         {
             other.gameObject.transform.parent = playerDefTransform;
+            
         }
     }
 }
