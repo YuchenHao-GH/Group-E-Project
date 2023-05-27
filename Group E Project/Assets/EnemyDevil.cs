@@ -10,45 +10,41 @@ public class EnemyDevil : Enemy
     public Transform movePos;
     public Transform leftDownPos;
     public Transform rightUpPos;
+    public Transform player;
+    private Animator animator;
+    public float cooldown = 1;
+    
     // Start is called before the first frame update
     public void Start()
     {
+        animator = GetComponent<Animator>();
         base.Start();
         waitTime = startWaitTime;
-        movePos.position = GetRandomPos();
     }
+   
 
     // Update is called once per frame
     public void Update()
     {
-        base.Update();
-        transform.position = Vector2.MoveTowards(transform.position, movePos.position, speed * Time.deltaTime);
-        Vector2 diff = movePos.position - transform.position;
-        if (diff.x < 0)
-        {
+        if (player.transform.position.x < transform.position.x) {
             transform.localScale = new Vector3(-1, 1, 1);
+            
         }
-        else if (diff.x > 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
+        else {
+             transform.localScale = new Vector3(1, 1, 1);
         }
-        if(Vector2.Distance(transform.position, movePos.position) < 0.1f)
+          if(health <= 0)
         {
-            if(waitTime <= 0)
+         
+            animator.SetTrigger("Die");
+            cooldown-= Time.deltaTime;
+            if (cooldown < 0)
             {
-                movePos.position = GetRandomPos();
-                waitTime = startWaitTime;
-            }
-            else
-            {
-                waitTime -= Time.deltaTime;
+
+                Destroy(gameObject);
             }
         }
     }
 
-    Vector2 GetRandomPos()
-    {
-        Vector2 rndPos = new Vector2(Random.Range(leftDownPos.position.x, rightUpPos.position.x), Random.Range(leftDownPos.position.y, rightUpPos.position.y));
-        return rndPos;
-    }
+    
 }

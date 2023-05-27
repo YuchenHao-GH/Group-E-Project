@@ -50,6 +50,8 @@ public class PlayerAttack : MonoBehaviour
         if(other.gameObject.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().TakeDamage(swordDamage);
+            other.GetComponent<Enemy>().Knockback(1, 0);
+
         }
     }
 }

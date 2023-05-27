@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     public Animator animator;
     public float speed = 0.5f;
     public float jumpSpeed;
-    public float runSpeed = 550.0f;
+    public float runSpeed = 275.0f;
     private BoxCollider2D playerFeet;
     private bool isGround;
 

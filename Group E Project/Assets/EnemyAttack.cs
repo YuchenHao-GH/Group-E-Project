@@ -23,14 +23,12 @@ public class EnemyAttack : MonoBehaviour
         animator.SetBool("Walking", true);
         if (test <= 10 && test >= -10)
         {
-        if (Cooldown <= 3)
+        if (Cooldown <= 1.5f)
         {
             Cooldown += Time.deltaTime;
         }
         }
-        else {
-            Cooldown = 0;
-        }
+        
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -38,9 +36,9 @@ public class EnemyAttack : MonoBehaviour
         {
             Debug.Log("Fortnite");
             Player player = collider.gameObject.GetComponent<Player>();
-            if (player != null && Cooldown >= 3)
+            if (player != null && Cooldown >= 1.5f)
             {
-                   Debug.Log("?!?!?!?!");
+                Debug.Log("?!?!?!?!");
                 animator.SetBool("Walking", false);
                 Cooldown = 0;
                 animator.SetTrigger("Attack");
