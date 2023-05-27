@@ -38,10 +38,10 @@ public class Bullet : MonoBehaviour
                 enemy.TakeDamage(damage);
                 if (transform.position.x > enemy.transform.position.x)
                 {
-                    enemy.Knockback(-1);
+                    enemy.Knockback(-1, 0);
                 }
                 else {
-                    enemy.Knockback(1);
+                    enemy.Knockback(1, 0);
                 }
             }
             Destroy(gameObject);

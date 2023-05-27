@@ -20,10 +20,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        
         
     }
 
@@ -31,9 +28,10 @@ public class Enemy : MonoBehaviour
     {
         health -= damage;
     }
-    public void Knockback(int direction)
+    public void Knockback(int direction, int playermomentum)
     {
-        rb.AddForce(Vector2.right * 20000 * direction);
+        rb.AddForce(Vector2.right * 40000 * direction);
+        rb.AddForce(Vector2.up * 60000 * (rb.velocity.x/10));
     }
     public void SwordKnockback (int direction)
     {
@@ -43,14 +41,5 @@ public class Enemy : MonoBehaviour
 
 
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
-        {
-            if(playerHealth != null)
-            {
-                playerHealth.TakeDamage(damage);
-            }
-        }
-    }
+   
 }
