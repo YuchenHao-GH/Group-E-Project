@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Linq;
 public class CheckpointManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class CheckpointManager : MonoBehaviour
         if (checkpoints.All(go => go.Completed == true))
         {
             levelcompleted = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
