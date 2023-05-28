@@ -23,6 +23,7 @@ public class CheckpointManager : MonoBehaviour
         if (checkpoints.All(go => go.Completed == true))
         {
             levelcompleted = true;
+            SoundManager.PlayLevelCompleteSoundClip();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }

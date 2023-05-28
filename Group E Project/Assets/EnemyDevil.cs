@@ -40,7 +40,7 @@ public class EnemyDevil : Enemy
             cooldown-= Time.deltaTime;
             if (cooldown < 0)
             {
-
+                SoundManager.PlayDevilDeathSoundClip();
                 Destroy(gameObject);
             }
         }

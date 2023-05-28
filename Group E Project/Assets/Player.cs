@@ -339,6 +339,7 @@ public class Player : MonoBehaviour
 
     public void AddHealth(float health)
     {
+        SoundManager.PlayHealthUpSoundClip();
         currentHealth += health;
 
         if (currentHealth > startingHealth)

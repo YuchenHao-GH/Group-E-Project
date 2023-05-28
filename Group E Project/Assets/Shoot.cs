@@ -36,6 +36,7 @@ public class Shoot : MonoBehaviour
     void Fire()
     {
         Cooldown = 0;
+        SoundManager.PlayShootSoundClip();
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Vector2 bulletDirection = (Vector2)firePoint.position - (Vector2)player.position;
         bullet.GetComponent<Rigidbody2D>().velocity = bulletDirection.normalized * bulletSpeed;
