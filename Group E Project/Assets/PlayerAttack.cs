@@ -27,6 +27,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if(Input.GetButtonDown("SwordAttack"))
         {
+            SoundManager.PlayAttackSoundClip();
             anim.SetTrigger("Attack");
             StartCoroutine(StartAttack());
         }
