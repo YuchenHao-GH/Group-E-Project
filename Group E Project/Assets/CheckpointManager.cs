@@ -25,6 +25,7 @@ public class CheckpointManager : MonoBehaviour
             levelcompleted = true;
             SoundManager.PlayLevelCompleteSoundClip();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+          
         }
     }
 }

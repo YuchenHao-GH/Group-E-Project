@@ -41,7 +41,7 @@ public class EnemyAttack : MonoBehaviour
                 Debug.Log("?!?!?!?!");
                 animator.SetBool("Walking", false);
                 Cooldown = 0;
-                SoundManager.PlayDevilAttackSoundClip();
+               SoundManager .PlayDevilAttackSoundClip();
                 animator.SetTrigger("Attack");
                 player.TakeDamage(1f);   
             }

@@ -24,7 +24,7 @@ public class Shoot : MonoBehaviour
     {
         if ((Input.GetButtonDown("Fire") || Input.GetAxis("Fire") > 0) && Cooldown >= 5)
         {
-            Fire(); 
+           
         } 
         if (Cooldown <= 5)
         {

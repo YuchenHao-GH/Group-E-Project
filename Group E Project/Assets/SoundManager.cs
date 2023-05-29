@@ -41,10 +41,12 @@ public class SoundManager : MonoBehaviour
     }
     public static void PlayAttackSoundClip()
     {
+        
         audioSrc.PlayOneShot(attackSound);
     }
     public static void PlayDevilDamageSoundClip()
     {
+        
         audioSrc.PlayOneShot(devilDamageSound);
     }
     public static void PlayDevilDeathSoundClip()
