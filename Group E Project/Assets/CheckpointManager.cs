@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Linq;
 public class CheckpointManager : MonoBehaviour
 {
@@ -24,8 +25,8 @@ public class CheckpointManager : MonoBehaviour
         {
             levelcompleted = true;
             SoundManager.PlayLevelCompleteSoundClip();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-          
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            UIManager.Instance.LevelComplete();
         }
     }
 }
