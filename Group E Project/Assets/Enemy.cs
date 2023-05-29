@@ -31,8 +31,8 @@ public class Enemy : MonoBehaviour
     }
     public void Knockback(int direction, int playermomentum)
     {
-        rb.AddForce(Vector2.right * 40000 * direction);
-        rb.AddForce(Vector2.up * 60000 * (rb.velocity.x/10));
+        rb.AddForce(Vector2.right * 2 * (rb.velocity.x/5) * direction);
+        rb.AddForce(Vector2.up * 3 * (rb.velocity.x/10));
     }
     public void SwordKnockback (int direction)
     {

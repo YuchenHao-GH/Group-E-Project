@@ -117,11 +117,7 @@ public class Player : MonoBehaviour
             //rb.velocity = new Vector2(rb.velocity.y,speed);
             //animator.SetBool("IsRun", true);
         //}
-        if (Input.GetButtonDown("Reload"))
-        {
-            rb.velocity = new Vector2(0, 0);
-            transform.position = mostrecentcheckpoint.transform.position;
-        }
+        
 
     }
     void FixedUpdate()
@@ -149,8 +145,8 @@ public class Player : MonoBehaviour
            animator.SetBool("IsRun", false);
            animator.SetBool("IsWalk", false);
             animator.SetBool("IsIdle", false);
-
-           animator.SetBool("IsSliding", true);
+            animator.SetBool("IsSliding", true);
+         
         }
         if(rb.velocity.magnitude <= maxspeed)
         {
@@ -259,7 +255,11 @@ public class Player : MonoBehaviour
             {
                 rb.AddForce(Vector2.up * 2450, ForceMode2D.Impulse);
                 animator.SetBool("IsJump", true);
-                
+             
+                animator.SetBool("IsRun", false);
+           animator.SetBool("IsWalk", false);
+            animator.SetBool("IsSliding", false);
+            animator.SetBool("IsIdle", false);
                 //Vector2 jumpVel = new Vector2(0.0f, jumpSpeed);
             }
         }
@@ -273,6 +273,7 @@ public class Player : MonoBehaviour
             {
                 animator.SetBool("IsJump", false);
                 animator.SetBool("IsFall", true);
+                
             }
         }
         else if(isGround)
@@ -330,10 +331,8 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Vector2 direction = transform.position - collision.transform.position;
-            float distance = direction.magnitude;
-            float pushForce = 500f;
-            GetComponent<Rigidbody2D>().AddForce(direction.normalized * pushForce, ForceMode2D.Impulse);
+           
+            rb.velocity = new Vector2 (rb.velocity.x, rb.velocity.y);
         }
     }
 

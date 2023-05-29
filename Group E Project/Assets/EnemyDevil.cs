@@ -13,6 +13,9 @@ public class EnemyDevil : Enemy
     public Transform player;
     private Animator animator;
     public float cooldown = 1;
+    bool disablecollision = false;
+    CapsuleCollider2D collider1;
+    BoxCollider2D collider2;
     
     // Start is called before the first frame update
     public void Start()
@@ -20,6 +23,8 @@ public class EnemyDevil : Enemy
         animator = GetComponent<Animator>();
         base.Start();
         waitTime = startWaitTime;
+        collider1= GetComponent<CapsuleCollider2D>();
+         collider2 = GetComponent<BoxCollider2D>();
     }
    
 
@@ -35,7 +40,8 @@ public class EnemyDevil : Enemy
         }
           if(health <= 0)
         {
-         
+            disablecollision = true;
+            collider2.enabled = false;
             animator.SetTrigger("Die");
             cooldown-= Time.deltaTime;
             if (cooldown < 0)
@@ -43,6 +49,14 @@ public class EnemyDevil : Enemy
                 SoundManager.PlayDevilDeathSoundClip();
                 Destroy(gameObject);
             }
+        }
+    }
+   void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Player" && disablecollision == true)
+        {
+            Debug.Log("Fortnite");
+            Physics2D.IgnoreCollision(collider.gameObject.GetComponent<CapsuleCollider2D>(), collider1);
         }
     }
 
