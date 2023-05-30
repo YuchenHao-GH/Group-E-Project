@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public float runSpeed = 275.0f;
     private BoxCollider2D playerFeet;
     private bool isGround;
+    private bool isRightRamp;
 
 
     private Vector2 groundNormal = Vector2.up;
@@ -99,7 +100,27 @@ public class Player : MonoBehaviour
         Jump();
         CheckGrounded();
         SwitchAnimation();
+        LayerMask mask = LayerMask.GetMask("ground");
+        LayerMask rightrampmask = LayerMask.GetMask("downramp");
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 2, mask);
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, transform.right, 2, rightrampmask);
+        RaycastHit2D test = Physics2D.Raycast(transform.position, Vector2.down, 2, mask);
+       
+
+        if (test.collider!= null)
+        {
+            grounded = true;
+
+        }
+        else 
+        {
+            grounded = false;
+        }
         
+        if (ramped == true)
+        {
+            
+        }
         
     
         //if (horizontalforce > 0)
@@ -123,31 +144,8 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         
-        LayerMask mask = LayerMask.GetMask("ground");
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 2, mask);
-        RaycastHit2D test = Physics2D.Raycast(transform.position, Vector2.down, 2, mask);
-
-        if (test.collider!= null)
-        {
-            grounded = true;
-        }
-        else 
-        {
-            grounded = false;
-        }
         
-        if (ramped == true)
-        {
-            
-        }
-        if (downramped == true)
-        {
-           animator.SetBool("IsRun", false);
-           animator.SetBool("IsWalk", false);
-            animator.SetBool("IsIdle", false);
-            animator.SetBool("IsSliding", true);
-         
-        }
+       
         if(rb.velocity.magnitude <= maxspeed)
         {
             //rb.AddForce(transform.right * horizontalforce * 800);
@@ -173,6 +171,7 @@ public class Player : MonoBehaviour
     void CheckGrounded()
     {
         isGround = playerFeet.IsTouchingLayers(LayerMask.GetMask("ground"));
+        isRightRamp = playerFeet.IsTouchingLayers(LayerMask.GetMask("downramp"));
     }
 
     void Flip()
@@ -200,6 +199,7 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("IsRun", false);
            animator.SetBool("IsSliding", false);
+             animator.SetBool("isSlidingDownRight", false);
             animator.SetBool("IsIdle", false);
             animator.SetBool("IsWalk", true);
         }
@@ -209,6 +209,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsSliding", false);
            animator.SetBool("IsWalk", false);
             animator.SetBool("IsIdle", false);
+              animator.SetBool("isSlidingDownRight", false);
             animator.SetBool("IsRun", true);
         }
         }
@@ -221,6 +222,7 @@ public class Player : MonoBehaviour
            animator.SetBool("IsSliding", false);
             animator.SetBool("IsIdle", false);
             animator.SetBool("IsWalk", true);
+              animator.SetBool("isSlidingDownRight", false);
         }
 
         else if(rb.velocity.x > 2f || rb.velocity.x < -2f && (moveDir > 0 || moveDir < 0))
@@ -228,6 +230,7 @@ public class Player : MonoBehaviour
         animator.SetBool("IsSliding", false);
            animator.SetBool("IsWalk", false);
             animator.SetBool("IsIdle", false);
+              animator.SetBool("isSlidingDownRight", false);
             animator.SetBool("IsRun", true);
         }
         }
@@ -237,13 +240,16 @@ public class Player : MonoBehaviour
             animator.SetBool("IsIdle", false);
             animator.SetBool("IsWalk", false);
             animator.SetBool("IsSliding", true);
+              animator.SetBool("isSlidingDownRight", false);
         }
+       
         else
         {
           animator.SetBool("IsRun", false);
            animator.SetBool("IsWalk", false);
             animator.SetBool("IsSliding", false);
             animator.SetBool("IsIdle", true);
+                  animator.SetBool("isSlidingDownRight", false);
         }
     }
 
@@ -251,7 +257,7 @@ public class Player : MonoBehaviour
     {
         if(Input.GetButtonDown("Jump"))
         {
-            if(isGround)
+            if(isGround || isRightRamp)
             {
                 rb.AddForce(Vector2.up * 2450, ForceMode2D.Impulse);
                 animator.SetBool("IsJump", true);
@@ -276,7 +282,7 @@ public class Player : MonoBehaviour
                 
             }
         }
-        else if(isGround)
+        else if(isGround || isRightRamp)
         {
             animator.SetBool("IsFall", false);
             
