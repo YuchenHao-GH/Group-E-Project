@@ -34,14 +34,12 @@ public class EnemyAttack : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            Debug.Log("Fortnite");
             Player player = collider.gameObject.GetComponent<Player>();
             if (player != null && Cooldown >= 1.5f)
             {
-                Debug.Log("?!?!?!?!");
                 animator.SetBool("Walking", false);
                 Cooldown = 0;
-               SoundManager .PlayDevilAttackSoundClip();
+                SoundManager .PlayDevilAttackSoundClip();
                 animator.SetTrigger("Attack");
                 player.TakeDamage(1f);   
             }

@@ -11,16 +11,12 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        //Invoke("DestroyBullet", lifeTime);
+
     }
 
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= lifeTime)
-        {
-            //Destroy(gameObject);
-        }
     }
 
     public void SetDamage(int damage)
@@ -47,9 +43,4 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    //private void DestroyBullet()
-    //{
-        //Destroy(gameObject, 0f);
-    //}
 }
