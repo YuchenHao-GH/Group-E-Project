@@ -47,16 +47,6 @@ public class Player : MonoBehaviour
         currentHealth = startingHealth;
     }
 
-    // public void RemoveAnimations()
-    // {
-        
-    // {
-    //     foreach(AnimatorControllerParameter p in animationCParameter)
-    //     {
-    //         animator.SetBool(p.name, false);
-    //     }
-    // }
-    // }
     public void TakeDamage(float damage)
     {
         animator.SetTrigger("IsHit");
@@ -74,11 +64,9 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableHit()
     {
-        Debug.Log("Yes!");
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(2f);
         Die();
-        //Invoke("Die", 1f);
     }
 
     IEnumerator ChangeState()
@@ -121,51 +109,13 @@ public class Player : MonoBehaviour
         {
             
         }
-        
-    
-        //if (horizontalforce > 0)
-        //{
-            //transform.localScale = new Vector3(1, 1, 1);
-        //}
-        //else if (horizontalforce < 0)
-        //{
-            //transform.localScale = new Vector3(-1, 1, 1);
-        //}
-       
-        //if (Input.GetButtonDown("Jump") && grounded == true) 
-        //{
-            //rb.AddForce(transform.up * 120000);
-            //rb.velocity = new Vector2(rb.velocity.y,speed);
-            //animator.SetBool("IsRun", true);
-        //}
-        
-
     }
     void FixedUpdate()
     {
-        
-        
-       
         if(rb.velocity.magnitude <= maxspeed)
         {
-            //rb.AddForce(transform.right * horizontalforce * 800);
+
         }
-        //maintain vertical on slope (testing)
-        // RaycastHit2D hit2 = Physics2D.Raycast(transform.position, Vector2.down);
-        // if (hit2.collider != null)
-        // {
-        //     groundNormal = hit2.normal;
-        // }
-        // float angle = Vector2.Angle(Vector2.up, groundNormal);
-        // if (angle > maxRotationAngle)
-        // {
-        //     Quaternion targetRotation = Quaternion.FromToRotation(Vector2.up, groundNormal);
-        //     rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
-        // }
-        // // tilted center of gravity
-        // float tiltAngle = -horizontalforce * tiltSpeed;
-        // tiltAngle = Mathf.Clamp(tiltAngle, -maxTiltAngle, maxTiltAngle);
-        // transform.rotation = Quaternion.Euler(0f, 0f, tiltAngle);
     }
 
     void CheckGrounded()
@@ -198,18 +148,18 @@ public class Player : MonoBehaviour
             if(rb.velocity.x < 2f && rb.velocity.x > -2f && (moveDir > 0 || moveDir < 0))
         {
             animator.SetBool("IsRun", false);
-           animator.SetBool("IsSliding", false);
-             animator.SetBool("isSlidingDownRight", false);
+            animator.SetBool("IsSliding", false);
+            animator.SetBool("isSlidingDownRight", false);
             animator.SetBool("IsIdle", false);
             animator.SetBool("IsWalk", true);
         }
 
         else if(rb.velocity.x > 2f || rb.velocity.x < -2f && (moveDir > 0 || moveDir < 0))
         {
-        animator.SetBool("IsSliding", false);
-           animator.SetBool("IsWalk", false);
+            animator.SetBool("IsSliding", false);
+            animator.SetBool("IsWalk", false);
             animator.SetBool("IsIdle", false);
-              animator.SetBool("isSlidingDownRight", false);
+            animator.SetBool("isSlidingDownRight", false);
             animator.SetBool("IsRun", true);
         }
         }
@@ -219,18 +169,18 @@ public class Player : MonoBehaviour
             if(rb.velocity.x < 2f && rb.velocity.x > -2f && (moveDir > 0 || moveDir < 0))
         {
             animator.SetBool("IsRun", false);
-           animator.SetBool("IsSliding", false);
+            animator.SetBool("IsSliding", false);
             animator.SetBool("IsIdle", false);
             animator.SetBool("IsWalk", true);
-              animator.SetBool("isSlidingDownRight", false);
+            animator.SetBool("isSlidingDownRight", false);
         }
 
         else if(rb.velocity.x > 2f || rb.velocity.x < -2f && (moveDir > 0 || moveDir < 0))
         {
-        animator.SetBool("IsSliding", false);
-           animator.SetBool("IsWalk", false);
+            animator.SetBool("IsSliding", false);
+            animator.SetBool("IsWalk", false);
             animator.SetBool("IsIdle", false);
-              animator.SetBool("isSlidingDownRight", false);
+            animator.SetBool("isSlidingDownRight", false);
             animator.SetBool("IsRun", true);
         }
         }
@@ -240,16 +190,16 @@ public class Player : MonoBehaviour
             animator.SetBool("IsIdle", false);
             animator.SetBool("IsWalk", false);
             animator.SetBool("IsSliding", true);
-              animator.SetBool("isSlidingDownRight", false);
+            animator.SetBool("isSlidingDownRight", false);
         }
        
         else
         {
-          animator.SetBool("IsRun", false);
-           animator.SetBool("IsWalk", false);
+            animator.SetBool("IsRun", false);
+            animator.SetBool("IsWalk", false);
             animator.SetBool("IsSliding", false);
             animator.SetBool("IsIdle", true);
-                  animator.SetBool("isSlidingDownRight", false);
+            animator.SetBool("isSlidingDownRight", false);
         }
     }
 
@@ -261,12 +211,10 @@ public class Player : MonoBehaviour
             {
                 rb.AddForce(Vector2.up * 2450, ForceMode2D.Impulse);
                 animator.SetBool("IsJump", true);
-             
                 animator.SetBool("IsRun", false);
-           animator.SetBool("IsWalk", false);
-            animator.SetBool("IsSliding", false);
-            animator.SetBool("IsIdle", false);
-                //Vector2 jumpVel = new Vector2(0.0f, jumpSpeed);
+                animator.SetBool("IsWalk", false);
+                animator.SetBool("IsSliding", false);
+                animator.SetBool("IsIdle", false);
             }
         }
     }
@@ -298,8 +246,6 @@ public class Player : MonoBehaviour
         if(collider.gameObject.tag == "ramp" || collider.gameObject.tag == "downramp")
         {
             ramped = true;
-            //rb.freezeRotation = false;
-            //rb.rotation = 45;
         }
         if (collider.gameObject.tag == "downramp")
         {
@@ -324,8 +270,6 @@ public class Player : MonoBehaviour
         if(collider.gameObject.tag == "ramp" || collider.gameObject.tag == "downramp")
         {
             ramped = false;
-            //rb.rotation = 0;
-            //rb.freezeRotation = false;
         }
         if (collider.gameObject.tag == "downramp")
         {
@@ -351,9 +295,5 @@ public class Player : MonoBehaviour
         {
             currentHealth = startingHealth;
         }
-    }
-    void Attack()
-    {
-        
     }
 }

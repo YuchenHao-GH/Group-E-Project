@@ -25,7 +25,6 @@ public class Sword : MonoBehaviour
         if (Input.GetButtonDown("SwordAttack"))
         {
             Attack = true;
-            Debug.Log("1");
         }
         if (Attack == true)
         {

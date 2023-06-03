@@ -24,7 +24,7 @@ public class EnemyDevil : Enemy
         base.Start();
         waitTime = startWaitTime;
         collider1= GetComponent<CapsuleCollider2D>();
-         collider2 = GetComponent<BoxCollider2D>();
+        collider2 = GetComponent<BoxCollider2D>();
     }
    
 
@@ -55,10 +55,7 @@ public class EnemyDevil : Enemy
     {
         if (collider.gameObject.tag == "Player" && disablecollision == true)
         {
-            Debug.Log("Fortnite");
             Physics2D.IgnoreCollision(collider.gameObject.GetComponent<CapsuleCollider2D>(), collider1);
         }
     }
-
-    
 }
