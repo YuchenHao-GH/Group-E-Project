@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Sword
   - ReloadZone
+  - EnemyDeathZone
   layers:
   - Default
   - TransparentFX

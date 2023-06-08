@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject startPanel;
     public GameObject nextLevelPanel;
     public GameObject gameOverPanel;
+    public GameObject reloadPanel;
     [SerializeField] private GameObject activePanel;
     static private UIManager instance;
     static public UIManager Instance
@@ -87,5 +88,17 @@ public class UIManager : MonoBehaviour
             next = scene.buildIndex + 1;
         }
         SceneManager.LoadScene(next);
+    }
+
+    public void PlayerDied()
+    {
+        reloadPanel.SetActive(true);
+        activePanel = reloadPanel;
+    }
+
+    public void PlayerReload()
+    {
+        activePanel.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

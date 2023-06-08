@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
@@ -78,6 +81,7 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+        UIManager.Instance.PlayerDied();
     }
 
     // Update is called once per frame
