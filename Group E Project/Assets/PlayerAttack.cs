@@ -23,6 +23,11 @@ public class PlayerAttack : MonoBehaviour
         SwordAttack();
     }
 
+    public void Test() 
+    {
+         StartCoroutine(StartAttack());
+    }
+
     void SwordAttack()
     {
         if(Input.GetButtonDown("SwordAttack"))

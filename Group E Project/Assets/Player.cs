@@ -24,7 +24,8 @@ public class Player : MonoBehaviour
     private BoxCollider2D playerFeet;
     private bool isGround;
     private bool isRightRamp;
-
+    public bool movingright;
+    public bool movingleft;
 
     private Vector2 groundNormal = Vector2.up;
     public float maxRotationAngle = 45f;
@@ -50,6 +51,15 @@ public class Player : MonoBehaviour
         currentHealth = startingHealth;
     }
 
+    public void Test(bool lol)
+    {
+        movingright = lol;
+    }
+
+    public void Left(bool lol)
+    {
+        movingleft = lol;
+    }
     public void TakeDamage(float damage)
     {
         animator.SetTrigger("IsHit");
@@ -116,9 +126,13 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(rb.velocity.magnitude <= maxspeed)
+        if(movingright == true)
         {
-
+             rb.AddForce(transform.right * 1 * 400);
+        }
+        if(movingleft == true)
+        {
+             rb.AddForce(transform.right * -1 * 400);
         }
     }
 
@@ -206,6 +220,14 @@ public class Player : MonoBehaviour
             animator.SetBool("isSlidingDownRight", false);
         }
     }
+
+
+public void TestJump()
+{
+     if(isGround || isRightRamp) {
+     rb.AddForce(Vector2.up * 2450, ForceMode2D.Impulse);
+     }
+}
 
     void Jump()
     {
