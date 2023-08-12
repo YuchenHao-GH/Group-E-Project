@@ -32,7 +32,6 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 2800000, guid: 026d1fe998cda4c2b91aecd940230845, type: 3}
     - {fileID: 2800000, guid: 4e7f8a23ce71940a3abe0a6035078907, type: 3}
     - {fileID: 2800000, guid: 4e610b0419fef41c98a64aa60974171f, type: 3}
     - {fileID: 2800000, guid: 8f3c242850bdf4d168718fec4ffdee77, type: 3}
@@ -56,9 +55,6 @@ SpriteAtlas:
   - {fileID: 2828032271763480184, guid: b075cc46d61a546b49d4666c3173fc4a, type: 3}
   - {fileID: 8602337822535463475, guid: 8f3c242850bdf4d168718fec4ffdee77, type: 3}
   - {fileID: 2350632813872090584, guid: 8f3c242850bdf4d168718fec4ffdee77, type: 3}
-  - {fileID: -787564300394146941, guid: 026d1fe998cda4c2b91aecd940230845, type: 3}
-  - {fileID: -4944552721621418197, guid: 026d1fe998cda4c2b91aecd940230845, type: 3}
-  - {fileID: -4066976953478951114, guid: 026d1fe998cda4c2b91aecd940230845, type: 3}
   - {fileID: -2051806757058933141, guid: d1c9bebab33714c438945073e7542141, type: 3}
   - {fileID: 4957864613835654088, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
   - {fileID: -1822613323893375605, guid: 3a5f1d1b7ccc048cca4eec65b981e319, type: 3}
@@ -99,9 +95,6 @@ SpriteAtlas:
   - Weapon
   - Eyes B
   - Eyes F
-  - Armor Upper Arm L
-  - Armor Body
-  - Armor Upper Arm R
   - Mouth F
   - Upper Arm L
   - Lower Arm L
