@@ -14,8 +14,8 @@ public class EnemyDevil : Enemy
     private Animator animator;
     public float cooldown = 1;
     bool disablecollision = false;
-    CapsuleCollider2D collider1;
-    BoxCollider2D collider2;
+    public CapsuleCollider2D collider1;
+    public BoxCollider2D collider2;
     
     // Start is called before the first frame update
     public void Start()
@@ -23,8 +23,6 @@ public class EnemyDevil : Enemy
         animator = GetComponent<Animator>();
         base.Start();
         waitTime = startWaitTime;
-        collider1= GetComponent<CapsuleCollider2D>();
-        collider2 = GetComponent<BoxCollider2D>();
     }
    
 
@@ -41,7 +39,6 @@ public class EnemyDevil : Enemy
           if(health <= 0)
         {
             disablecollision = true;
-            collider2.enabled = false;
             animator.SetTrigger("Die");
             cooldown-= Time.deltaTime;
             if (cooldown < 0)
@@ -56,6 +53,8 @@ public class EnemyDevil : Enemy
         if (collider.gameObject.tag == "Player" && disablecollision == true)
         {
             Physics2D.IgnoreCollision(collider.gameObject.GetComponent<CapsuleCollider2D>(), collider1);
+             Physics2D.IgnoreCollision(collider.gameObject.GetComponent<BoxCollider2D>(), collider2);
+
         }
     }
 }

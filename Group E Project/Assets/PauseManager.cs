@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -22,7 +24,7 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         Time.timeScale = 0;
         isPaused = true;
@@ -33,7 +35,7 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
         Time.timeScale = 1;
         isPaused = false;
