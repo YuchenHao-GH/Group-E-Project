@@ -18,7 +18,7 @@ public class Item : MonoBehaviour
             Player player = other.gameObject.GetComponent<Player>();
             if (player != null)
             {
-                player.AddHealth(healAmount);
+           
                 Destroy(gameObject);
             }
         }

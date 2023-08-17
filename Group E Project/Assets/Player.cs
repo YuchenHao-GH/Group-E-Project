@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public bool grounded;
     public bool ramped;
     public bool downramped;
-    private float maxspeed = 15f;
+    private float maxspeed = 12f;
     public GameObject mostrecentcheckpoint;
     public float damage = 5;
     public float startingHealth = 10;
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     private bool isRightRamp;
     public bool movingright;
     public bool movingleft;
-
+    public Text text;
     private Vector2 groundNormal = Vector2.up;
     public float maxRotationAngle = 45f;
     public float rotationSpeed;
@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableHit()
     {
+        text.GetComponent<Timer>().Timing = false;
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(2f);
         Die();
@@ -97,9 +98,25 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        Input.multiTouchEnabled = true; 
+        float fingercount = 0;
+        if (Input.touchCount > 0)
+        {
+            foreach (Touch touch in Input.touches)
+            {
+            if (touch.position.x < Screen.width / 2.0f) {
+                Run();
+            }
+            if (touch.phase == TouchPhase.Began && touch.position.x > Screen.width / 2.0f && touch.position.y < Screen.height / 2.0f)
+            {
+                Jump();
+            }
+            }
+        }
         Flip();
-        Run();
-        Jump();
+    
+   
         CheckGrounded();
         SwitchAnimation();
         LayerMask mask = LayerMask.GetMask("ground");
@@ -153,12 +170,13 @@ public class Player : MonoBehaviour
 
     void Run()
     {
+            float moveDir = 1;
+            
         
-        float moveDir = Input.GetAxis("Horizontal");
         bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         if(rb.velocity.magnitude <= maxspeed)
         {
-            rb.AddForce(transform.right * moveDir * 400);
+            rb.AddForce(transform.right * moveDir * 100);
         }
          if (moveDir > 0)
         {
@@ -231,11 +249,10 @@ public void TestJump()
 
     void Jump()
     {
-        if(Input.GetButtonDown("Jump"))
-        {
+       
             if(isGround || isRightRamp)
             {
-                rb.AddForce(Vector2.up * 2450, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * 2500, ForceMode2D.Impulse);
                 animator.SetBool("IsJump", true);
                 animator.SetBool("IsRun", false);
                 animator.SetBool("IsWalk", false);
@@ -243,7 +260,8 @@ public void TestJump()
                 animator.SetBool("IsIdle", false);
             }
         }
-    }
+    
+
 
     void SwitchAnimation()
     {
@@ -283,9 +301,14 @@ public void TestJump()
         }
         if (collider.gameObject.tag== "ReloadZone")
         {
-            rb.velocity = new Vector2(0, 0);
-            transform.position = mostrecentcheckpoint.transform.position;
+          
+            StartCoroutine(DisableHit());
         }
+        if (collider.gameObject.tag == "Enemy")
+        {
+             Debug.Log("Hola");
+        }
+        
     }
     void OnTriggerExit2D(Collider2D collider)
     {
@@ -302,6 +325,8 @@ public void TestJump()
           downramped = false;
         }
     }
+
+    
 
     void OnCollisionEnter2D(Collision2D collision)
     {
