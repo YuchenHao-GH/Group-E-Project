@@ -65,7 +65,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Enemy"))
         {
-            //Player.AddForce(transform.right * 1000, ForceMode2D.Impulse);
+            Player.AddForce(transform.right * 800, ForceMode2D.Impulse);
             other.GetComponent<Enemy>().TakeDamage(swordDamage);
             other.GetComponent<Enemy>().Knockback(1, 0);
 
