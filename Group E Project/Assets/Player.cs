@@ -239,14 +239,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
-public void TestJump()
-{
-     if(isGround || isRightRamp) {
-     rb.AddForce(Vector2.up * 2450, ForceMode2D.Impulse);
-     }
-}
-
     void Jump()
     {
        
@@ -263,21 +255,53 @@ public void TestJump()
     
 
 
+    //void SwitchAnimation()
+    //{
+        //if(animator.GetBool("IsJump"))
+        //{
+            //if(rb.velocity.y < 0.0f)
+           //{
+                //while(isGround || isRightRamp)
+                //{
+                    //animator.SetBool("IsFall", false);
+                    //animator.SetBool("IsIdle", true);
+                //}
+                //animator.SetBool("IsJump", false);
+                //animator.SetBool("IsFall", true);
+                //Run();
+            //}
+        //}
+        //else if(isGround || isRightRamp)
+        //{
+            //animator.SetBool("IsFall", false);
+            
+        //}
+    //}
+
     void SwitchAnimation()
     {
-        if(animator.GetBool("IsJump"))
+        if (animator.GetBool("IsJump"))
         {
-            if(rb.velocity.y < 0.0f)
+            if (rb.velocity.y < 0.0f)
             {
-                animator.SetBool("IsJump", false);
-                animator.SetBool("IsFall", true);
-                
+                if (isGround || isRightRamp)
+                {
+                    animator.SetBool("IsFall", false);
+                    animator.SetBool("IsIdle", true);
+                    animator.SetBool("IsJump", false);
+                    Run();
+                }
+                else
+                {
+                    animator.SetBool("IsJump", false);
+                    animator.SetBool("IsFall", true);
+                }
             }
         }
-        else if(isGround || isRightRamp)
+        else if (isGround || isRightRamp)
         {
             animator.SetBool("IsFall", false);
-            
+            animator.SetBool("IsIdle", true);
         }
     }
 
