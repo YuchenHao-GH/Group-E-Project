@@ -295,10 +295,10 @@ public void TestJump()
         {
           downramped = true;
         }
-        if (collider.gameObject.tag == "checkpoint")
-        {
-            mostrecentcheckpoint = collider.gameObject;
-        }
+        //if (collider.gameObject.tag == "checkpoint")
+        //{
+            //mostrecentcheckpoint = collider.gameObject;
+        //}
         if (collider.gameObject.tag== "ReloadZone")
         {
           
