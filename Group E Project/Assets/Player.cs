@@ -268,6 +268,31 @@ public class Player : MonoBehaviour
                 animator.SetBool("IsIdle", false);
             }
         }
+    
+
+
+    //void SwitchAnimation()
+    //{
+        //if(animator.GetBool("IsJump"))
+        //{
+            //if(rb.velocity.y < 0.0f)
+           //{
+                //while(isGround || isRightRamp)
+                //{
+                    //animator.SetBool("IsFall", false);
+                    //animator.SetBool("IsIdle", true);
+                //}
+                //animator.SetBool("IsJump", false);
+                //animator.SetBool("IsFall", true);
+                //Run();
+            //}
+        //}
+        //else if(isGround || isRightRamp)
+        //{
+            //animator.SetBool("IsFall", false);
+            
+        //}
+    //}
 
     void SwitchAnimation()
     {
@@ -310,6 +335,10 @@ public class Player : MonoBehaviour
         {
           downramped = true;
         }
+        //if (collider.gameObject.tag == "checkpoint")
+        //{
+            //mostrecentcheckpoint = collider.gameObject;
+        //}
         if (collider.gameObject.tag== "ReloadZone")
         {
           
@@ -335,6 +364,17 @@ public class Player : MonoBehaviour
         if (collider.gameObject.tag == "downramp")
         {
           downramped = false;
+        }
+    }
+
+    
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+           
+            rb.velocity = new Vector2 (rb.velocity.x, rb.velocity.y);
         }
     }
 
