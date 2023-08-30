@@ -58,6 +58,7 @@ public class PlayerAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(startTime);
         collider2D.enabled = true;
+        StartCoroutine(disableHitBox());
     }
 
     IEnumerator disableHitBox()
@@ -70,7 +71,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Enemy"))
         {
-            Player.AddForce(transform.right * 800, ForceMode2D.Impulse);
+            Player.AddForce(transform.right * 500, ForceMode2D.Impulse);
             other.GetComponent<Enemy>().TakeDamage(swordDamage);
             other.GetComponent<Enemy>().Knockback(1, 0);
 

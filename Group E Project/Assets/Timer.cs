@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour
 {
     public Text TimerText;
-    public bool Timing = true;
-    public float CurrentTime;
-    public float TotalTime;
+    public bool Timing;
+    private float CurrentTime;
+    private float TotalTime;
     public Text FinalTime;
+
+    
     void Start()
     {
-        TimerText = GetComponent<Text>() as Text;
         CurrentTime = 0;
+        TotalTime = 0;
     }
 
+
+   
     // Update is called once per frame
     void Update()
     {

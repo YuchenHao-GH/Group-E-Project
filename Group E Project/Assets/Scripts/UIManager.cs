@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject nextLevelPanel;
     public GameObject gameOverPanel;
     public GameObject reloadPanel;
+
     [SerializeField] private GameObject activePanel;
     static private UIManager instance;
     static public UIManager Instance
@@ -38,6 +39,7 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
+        
         Scene scene = SceneManager.GetActiveScene();
         if (scene.buildIndex == 0)
         {
@@ -45,6 +47,8 @@ public class UIManager : MonoBehaviour
             startPanel.SetActive(true);
             activePanel = startPanel;
         }
+    
+
     }
 
     public void LevelComplete()

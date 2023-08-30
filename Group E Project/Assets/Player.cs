@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     private bool isRightRamp;
     public bool movingright;
     public bool movingleft;
-    public Text text;
+    GameObject text;
     private Vector2 groundNormal = Vector2.up;
     public float maxRotationAngle = 45f;
     public float rotationSpeed;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        text = GameObject.Find("TimerText");
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerFeet = GetComponent<BoxCollider2D>();
