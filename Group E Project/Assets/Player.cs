@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.EventSystems;
+
 
 public class Player : MonoBehaviour
 {
@@ -12,13 +14,13 @@ public class Player : MonoBehaviour
     public bool grounded;
     public bool ramped;
     public bool downramped;
-    private float maxspeed = 12f;
+    private float maxspeed = 15f;
     public GameObject mostrecentcheckpoint;
     public float damage = 5;
     public float startingHealth = 10;
     public float currentHealth;
     public Animator animator;
-    public float speed = 0.5f;
+    public float speed = 1f;
     public float jumpSpeed;
     public float runSpeed = 275.0f;
     private BoxCollider2D playerFeet;
@@ -30,6 +32,8 @@ public class Player : MonoBehaviour
     private Vector2 groundNormal = Vector2.up;
     public float maxRotationAngle = 45f;
     public float rotationSpeed;
+
+    public Camera Camera;
 
     public float tiltSpeed = 20f;
     public float maxTiltAngle = 45f;
@@ -68,6 +72,7 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             StartCoroutine(DisableHit());
+             Camera.GetComponent<CameraFollow>().enabled = false;
         }
         else
         {
@@ -77,6 +82,7 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableHit()
     {
+        Camera.GetComponent<CameraFollow>().Test();
         text.GetComponent<Timer>().Timing = false;
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(2f);
@@ -101,18 +107,28 @@ public class Player : MonoBehaviour
         
         Input.multiTouchEnabled = true; 
         float fingercount = 0;
+       
         if (Input.touchCount > 0)
         {
+            
             foreach (Touch touch in Input.touches)
             {
+                 if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+            {
             if (touch.position.x < Screen.width / 2.0f) {
-                Run();
+                movingright = true;
             }
             if (touch.phase == TouchPhase.Began && touch.position.x > Screen.width / 2.0f && touch.position.y < Screen.height / 2.0f)
             {
                 Jump();
             }
+           
+            
+        }
             }
+        }
+        else {
+            movingright = false;
         }
         Flip();
     
@@ -145,38 +161,13 @@ public class Player : MonoBehaviour
     {
         if(movingright == true)
         {
-             rb.AddForce(transform.right * 1 * 400);
-        }
-        if(movingleft == true)
-        {
-             rb.AddForce(transform.right * -1 * 400);
-        }
-    }
-
-    void CheckGrounded()
-    {
-        isGround = playerFeet.IsTouchingLayers(LayerMask.GetMask("ground"));
-        isRightRamp = playerFeet.IsTouchingLayers(LayerMask.GetMask("downramp"));
-    }
-
-    void Flip()
-    {
-        bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
-        if(plyerHasXAxisSpeed)
-        {
-           
-        }
-    }
-
-    void Run()
-    {
-            float moveDir = 1;
+             float moveDir = 1;
             
         
         bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         if(rb.velocity.magnitude <= maxspeed)
         {
-            rb.AddForce(transform.right * moveDir * 100);
+            rb.AddForce(transform.right * moveDir * 400);
         }
          if (moveDir > 0)
         {
@@ -237,6 +228,31 @@ public class Player : MonoBehaviour
             animator.SetBool("IsIdle", true);
             animator.SetBool("isSlidingDownRight", false);
         }
+        }
+        if(movingleft == true)
+        {
+             rb.AddForce(transform.right * -1 * 400);
+        }
+    }
+
+    void CheckGrounded()
+    {
+        isGround = playerFeet.IsTouchingLayers(LayerMask.GetMask("ground"));
+        isRightRamp = playerFeet.IsTouchingLayers(LayerMask.GetMask("downramp"));
+    }
+
+    void Flip()
+    {
+        bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+        if(plyerHasXAxisSpeed)
+        {
+           
+        }
+    }
+
+    void Run()
+    {
+            
     }
 
     void Jump()
@@ -298,6 +314,7 @@ public class Player : MonoBehaviour
         {
           
             StartCoroutine(DisableHit());
+         
         }
         if (collider.gameObject.tag == "Enemy")
         {
