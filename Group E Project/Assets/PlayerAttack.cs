@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -23,16 +24,20 @@ public class PlayerAttack : MonoBehaviour
     {
         Input.multiTouchEnabled = true; 
         float fingercount = 0;
+        
         if (Input.touchCount > 0)
         {
             foreach (Touch touch in Input.touches)
             {
-            if (touch.phase == TouchPhase.Began && touch.position.x > Screen.width / 2.0f && touch.position.y > Screen.height / 2.0f)
-            {
-                SwordAttack();
-            }
+                if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId)) 
+                {
+                    if (touch.phase == TouchPhase.Began && touch.position.x > Screen.width / 2.0f && touch.position.y > Screen.height / 2.0f)
+                    {
+                    SwordAttack();
+                    }
             }
         }
+            }
     }
 
     public void Test() 
