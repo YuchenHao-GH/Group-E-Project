@@ -44,8 +44,8 @@ public class UIManager : MonoBehaviour
         if (scene.buildIndex == 0)
         {
             // we're on the menu scene, show the start panel
-            startPanel.SetActive(true);
-            activePanel = startPanel;
+            
+           
         }
     
 
