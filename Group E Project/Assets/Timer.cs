@@ -6,15 +6,16 @@ using System;
 using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour
 {
-    public Text TimerText;
+    private Text TimerText;
     public bool Timing;
     private float CurrentTime;
     private float TotalTime;
-    public Text FinalTime;
-
-    
+    public Text Finaltime;
+  
     void Start()
     {
+        TimerText = GetComponent<Text>();
+            
         CurrentTime = 0;
         TotalTime = 0;
     }
@@ -29,7 +30,7 @@ public class Timer : MonoBehaviour
         CurrentTime = CurrentTime + Time.deltaTime;
         TimeSpan time = TimeSpan.FromSeconds(CurrentTime);
         TimerText.text = time.ToString(@"mm\:ss\:ff");
-        FinalTime.text = time.ToString(@"mm\:ss\:ff");
+        Finaltime.text = time.ToString(@"mm\:ss\:ff");
         }
         if (Timing == false)
         {

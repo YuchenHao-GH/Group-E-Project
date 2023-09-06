@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.EventSystems;
-
+using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     private Vector2 groundNormal = Vector2.up;
     public float maxRotationAngle = 45f;
     public float rotationSpeed;
+    public Tile Ramp;
 
     public Camera Camera;
 
@@ -127,9 +128,33 @@ public class Player : MonoBehaviour
         }
             }
         }
-        else {
+
+        else if (Input.touchCount <= 0)
+        {
             movingright = false;
+            if (rb.velocity.x >= 1)
+            {
+                animator.SetBool("IsRun", false);
+                animator.SetBool("IsSliding", true);
+                animator.SetBool("isSlidingDownRight", false);
+                animator.SetBool("IsIdle", false);
+                animator.SetBool("IsWalk", false);
+            }
+            else if (rb.velocity.x < 1)
+            {
+                animator.SetBool("IsRun", false);
+                animator.SetBool("IsSliding", false);
+                animator.SetBool("isSlidingDownRight", false);
+                animator.SetBool("IsIdle", true);
+                animator.SetBool("IsWalk", false);
+            }
         }
+
+        else {
+            
+        }
+
+
         Flip();
     
    
@@ -145,17 +170,18 @@ public class Player : MonoBehaviour
         if (test.collider!= null)
         {
             grounded = true;
+            if (test.collider.gameObject.GetComponent<Tilemap>().GetTile(new Vector3Int((int)transform.position.x, (int)transform.position.y - 2, (int)transform.position.z)) == Ramp)
+            {
+                ramped = true;
+            }
+            
 
         }
         else 
         {
             grounded = false;
         }
-        
-        if (ramped == true)
-        {
-            
-        }
+       
     }
     void FixedUpdate()
     {
@@ -300,12 +326,22 @@ public class Player : MonoBehaviour
         {
             if (rb.velocity.y < 0.0f)
             {
-                if (isGround || isRightRamp)
+                if (grounded == true)
                 {
-                    animator.SetBool("IsFall", false);
-                    animator.SetBool("IsIdle", true);
-                    animator.SetBool("IsJump", false);
-                    Run();
+                    if (rb.velocity.x < 1)
+                    {
+                        animator.SetBool("IsFall", false);
+                        animator.SetBool("IsIdle", true);
+                        animator.SetBool("IsJump", false);
+                      
+                    }
+                    else if (rb.velocity.x >= 1)
+                    {
+                        animator.SetBool("IsFall", false);
+                        animator.SetBool("IsSliding", true);
+                        animator.SetBool("IsJump", false);
+                       
+                    }
                 }
                 else
                 {
@@ -314,10 +350,10 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (isGround || isRightRamp)
+        else if (grounded==true)
         {
             animator.SetBool("IsFall", false);
-            animator.SetBool("IsIdle", true);
+            
         }
     }
 
@@ -347,7 +383,7 @@ public class Player : MonoBehaviour
         }
         if (collider.gameObject.tag == "Enemy")
         {
-             Debug.Log("Hola");
+            
         }
         
     }
@@ -373,8 +409,17 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-           
+            GameObject.Find("PlayerAttackArea").GetComponent<PlayerAttack>().enabled = false;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+            Debug.Log("Hewllo");
+            StartCoroutine(DisableHit());
+            Camera.GetComponent<CameraFollow>().enabled = false;
             rb.velocity = new Vector2 (rb.velocity.x, rb.velocity.y);
+            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            collision.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+
+
+
         }
     }
 

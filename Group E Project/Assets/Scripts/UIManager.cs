@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject nextLevelPanel;
     public GameObject gameOverPanel;
     public GameObject reloadPanel;
-
+ 
     [SerializeField] private GameObject activePanel;
     static private UIManager instance;
     static public UIManager Instance
@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+  
+
     }
     void Start()
     {

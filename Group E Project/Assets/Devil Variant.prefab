@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7087372914601765695, guid: 4ae377d373485ee4ca34d7e0b5f0863c, type: 3}
       propertyPath: m_Name
-      value: Devil
+      value: Devil Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7087372914735660761, guid: 4ae377d373485ee4ca34d7e0b5f0863c, type: 3}
       propertyPath: health
@@ -107,3 +107,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &5834006412150135631
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2854043053227154481}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.41299152, y: 0.9530573}
+  m_Size: {x: 0.16819191, y: 1.7342091}
+  m_Direction: 0

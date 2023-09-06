@@ -7,13 +7,14 @@ public class EnemyAttack : MonoBehaviour
     Collider2D AttackCollider;
     public float Cooldown = 0;
     private Animator animator;
-    public GameObject player;
+    private Player player;
     public float test;
     // Start is called before the first frame update
     void Start()
     {
         AttackCollider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame

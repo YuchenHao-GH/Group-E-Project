@@ -19,7 +19,7 @@ public class ProceduralGeneration : MonoBehaviour
     public GameObject player;
     public GameObject DeathZone;
     public GameObject Enemy;
-
+    Vector3Int Playerposition;
     void Start()
     {
         TileBase[] Prefab1Base = Prefab1.GetTilesBlock(Prefab1.cellBounds);
@@ -47,8 +47,9 @@ public class ProceduralGeneration : MonoBehaviour
              GroundTilemap.SetTilesBlock(ChunkReader, Prefab1Base);
              GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab1Base);
              Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 70, ChunkReader.y + 42, 0), Quaternion.identity);
-            
-             break;
+                    ChunkReader.y = ChunkReader.y - 2;
+
+                    break;
             case 2:
              GroundTilemap.SetTilesBlock(ChunkReader, Prefab2Base);
              GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab2Base);
@@ -58,7 +59,7 @@ public class ProceduralGeneration : MonoBehaviour
              GroundTilemap.SetTilesBlock(ChunkReader, Prefab3Base);
              GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab3Base);
             
-             ChunkReader.y = ChunkReader.y - 15;
+             ChunkReader.y = ChunkReader.y - 18;
              break;
             case 4:
              GroundTilemap.SetTilesBlock(ChunkReader, Prefab4Base);
@@ -74,12 +75,18 @@ public class ProceduralGeneration : MonoBehaviour
              GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab1Base);
              Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 65, ChunkReader.y + 42, 0), Quaternion.identity);
              Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 80, ChunkReader.y + 42, 0), Quaternion.identity);
-        
-             break;
+                    ChunkReader.y = ChunkReader.y - 2;
+                    break;
             }
 
         }
-           
+
+        Playerposition = new Vector3Int((int)player.transform.position.x, (int)player.transform.position.y, (int)player.transform.position.z);
+        TileBase[] Lol = GroundTilemap.GetTilesBlock(GroundTilemap.cellBounds);
+        
+      
+
+       
         
     }
 
@@ -98,12 +105,12 @@ public class ProceduralGeneration : MonoBehaviour
 
     public int RandomHeight()
     {
-    int random = (int) Random.Range(-3, 3);
+    int random = (int) Random.Range(-2, 3);
     Debug.Log(random);
     return random;
 
     }
 
-
+    
 
 }
