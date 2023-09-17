@@ -12,6 +12,9 @@ TagManager:
   - Sword
   - ReloadZone
   - EnemyDeathZone
+  - FinalText
+  - TimeText
+  - FinalCanvas
   layers:
   - Default
   - TransparentFX

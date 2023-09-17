@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject nextLevelPanel;
     public GameObject gameOverPanel;
     public GameObject reloadPanel;
+ 
     [SerializeField] private GameObject activePanel;
     static private UIManager instance;
     static public UIManager Instance
@@ -35,16 +36,21 @@ public class UIManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+  
+
     }
     void Start()
     {
+        
         Scene scene = SceneManager.GetActiveScene();
         if (scene.buildIndex == 0)
         {
             // we're on the menu scene, show the start panel
-            startPanel.SetActive(true);
-            activePanel = startPanel;
+            
+           
         }
+    
+
     }
 
     public void LevelComplete()

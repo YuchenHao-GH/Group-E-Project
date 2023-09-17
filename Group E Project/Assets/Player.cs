@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
@@ -12,13 +14,13 @@ public class Player : MonoBehaviour
     public bool grounded;
     public bool ramped;
     public bool downramped;
-    private float maxspeed = 12f;
+    private float maxspeed = 15f;
     public GameObject mostrecentcheckpoint;
     public float damage = 5;
     public float startingHealth = 10;
     public float currentHealth;
     public Animator animator;
-    public float speed = 0.5f;
+    public float speed = 1f;
     public float jumpSpeed;
     public float runSpeed = 275.0f;
     private BoxCollider2D playerFeet;
@@ -26,10 +28,13 @@ public class Player : MonoBehaviour
     private bool isRightRamp;
     public bool movingright;
     public bool movingleft;
-    public Text text;
+    GameObject text;
     private Vector2 groundNormal = Vector2.up;
     public float maxRotationAngle = 45f;
     public float rotationSpeed;
+    public Tile Ramp;
+
+    public Camera Camera;
 
     public float tiltSpeed = 20f;
     public float maxTiltAngle = 45f;
@@ -38,7 +43,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        text = GameObject.Find("TimerText");
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerFeet = GetComponent<BoxCollider2D>();
@@ -68,6 +73,7 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             StartCoroutine(DisableHit());
+             Camera.GetComponent<CameraFollow>().enabled = false;
         }
         else
         {
@@ -77,6 +83,7 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableHit()
     {
+        Camera.GetComponent<CameraFollow>().Test();
         text.GetComponent<Timer>().Timing = false;
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(2f);
@@ -101,19 +108,53 @@ public class Player : MonoBehaviour
         
         Input.multiTouchEnabled = true; 
         float fingercount = 0;
+       
         if (Input.touchCount > 0)
         {
+            
             foreach (Touch touch in Input.touches)
             {
+                 if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+            {
             if (touch.position.x < Screen.width / 2.0f) {
-                Run();
+                movingright = true;
             }
             if (touch.phase == TouchPhase.Began && touch.position.x > Screen.width / 2.0f && touch.position.y < Screen.height / 2.0f)
             {
                 Jump();
             }
+           
+            
+        }
             }
         }
+
+        else if (Input.touchCount <= 0)
+        {
+            movingright = false;
+            if (rb.velocity.x >= 1)
+            {
+                animator.SetBool("IsRun", false);
+                animator.SetBool("IsSliding", true);
+                animator.SetBool("isSlidingDownRight", false);
+                animator.SetBool("IsIdle", false);
+                animator.SetBool("IsWalk", false);
+            }
+            else if (rb.velocity.x < 1)
+            {
+                animator.SetBool("IsRun", false);
+                animator.SetBool("IsSliding", false);
+                animator.SetBool("isSlidingDownRight", false);
+                animator.SetBool("IsIdle", true);
+                animator.SetBool("IsWalk", false);
+            }
+        }
+
+        else {
+            
+        }
+
+
         Flip();
     
    
@@ -129,54 +170,30 @@ public class Player : MonoBehaviour
         if (test.collider!= null)
         {
             grounded = true;
+            if (test.collider.gameObject.GetComponent<Tilemap>().GetTile(new Vector3Int((int)transform.position.x, (int)transform.position.y - 2, (int)transform.position.z)) == Ramp)
+            {
+                ramped = true;
+            }
+            
 
         }
         else 
         {
             grounded = false;
         }
-        
-        if (ramped == true)
-        {
-            
-        }
+       
     }
     void FixedUpdate()
     {
         if(movingright == true)
         {
-             rb.AddForce(transform.right * 1 * 400);
-        }
-        if(movingleft == true)
-        {
-             rb.AddForce(transform.right * -1 * 400);
-        }
-    }
-
-    void CheckGrounded()
-    {
-        isGround = playerFeet.IsTouchingLayers(LayerMask.GetMask("ground"));
-        isRightRamp = playerFeet.IsTouchingLayers(LayerMask.GetMask("downramp"));
-    }
-
-    void Flip()
-    {
-        bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
-        if(plyerHasXAxisSpeed)
-        {
-           
-        }
-    }
-
-    void Run()
-    {
-            float moveDir = 1;
+             float moveDir = 1;
             
         
         bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         if(rb.velocity.magnitude <= maxspeed)
         {
-            rb.AddForce(transform.right * moveDir * 100);
+            rb.AddForce(transform.right * moveDir * 700);
         }
          if (moveDir > 0)
         {
@@ -237,6 +254,31 @@ public class Player : MonoBehaviour
             animator.SetBool("IsIdle", true);
             animator.SetBool("isSlidingDownRight", false);
         }
+        }
+        if(movingleft == true)
+        {
+             rb.AddForce(transform.right * -1 * 400);
+        }
+    }
+
+    void CheckGrounded()
+    {
+        isGround = playerFeet.IsTouchingLayers(LayerMask.GetMask("ground"));
+        isRightRamp = playerFeet.IsTouchingLayers(LayerMask.GetMask("downramp"));
+    }
+
+    void Flip()
+    {
+        bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+        if(plyerHasXAxisSpeed)
+        {
+           
+        }
+    }
+
+    void Run()
+    {
+            
     }
 
     void Jump()
@@ -252,6 +294,31 @@ public class Player : MonoBehaviour
                 animator.SetBool("IsIdle", false);
             }
         }
+    
+
+
+    //void SwitchAnimation()
+    //{
+        //if(animator.GetBool("IsJump"))
+        //{
+            //if(rb.velocity.y < 0.0f)
+           //{
+                //while(isGround || isRightRamp)
+                //{
+                    //animator.SetBool("IsFall", false);
+                    //animator.SetBool("IsIdle", true);
+                //}
+                //animator.SetBool("IsJump", false);
+                //animator.SetBool("IsFall", true);
+                //Run();
+            //}
+        //}
+        //else if(isGround || isRightRamp)
+        //{
+            //animator.SetBool("IsFall", false);
+            
+        //}
+    //}
 
     void SwitchAnimation()
     {
@@ -259,12 +326,22 @@ public class Player : MonoBehaviour
         {
             if (rb.velocity.y < 0.0f)
             {
-                if (isGround || isRightRamp)
+                if (grounded == true)
                 {
-                    animator.SetBool("IsFall", false);
-                    animator.SetBool("IsIdle", true);
-                    animator.SetBool("IsJump", false);
-                    Run();
+                    if (rb.velocity.x < 1)
+                    {
+                        animator.SetBool("IsFall", false);
+                        animator.SetBool("IsIdle", true);
+                        animator.SetBool("IsJump", false);
+                      
+                    }
+                    else if (rb.velocity.x >= 1)
+                    {
+                        animator.SetBool("IsFall", false);
+                        animator.SetBool("IsSliding", true);
+                        animator.SetBool("IsJump", false);
+                       
+                    }
                 }
                 else
                 {
@@ -273,10 +350,10 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (isGround || isRightRamp)
+        else if (grounded==true)
         {
             animator.SetBool("IsFall", false);
-            animator.SetBool("IsIdle", true);
+            
         }
     }
 
@@ -294,14 +371,19 @@ public class Player : MonoBehaviour
         {
           downramped = true;
         }
+        //if (collider.gameObject.tag == "checkpoint")
+        //{
+            //mostrecentcheckpoint = collider.gameObject;
+        //}
         if (collider.gameObject.tag== "ReloadZone")
         {
           
             StartCoroutine(DisableHit());
+         
         }
         if (collider.gameObject.tag == "Enemy")
         {
-             Debug.Log("Hola");
+            
         }
         
     }
@@ -318,6 +400,26 @@ public class Player : MonoBehaviour
         if (collider.gameObject.tag == "downramp")
         {
           downramped = false;
+        }
+    }
+
+    
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            GameObject.Find("PlayerAttackArea").GetComponent<PlayerAttack>().enabled = false;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+            Debug.Log("Hewllo");
+            StartCoroutine(DisableHit());
+            Camera.GetComponent<CameraFollow>().enabled = false;
+            rb.velocity = new Vector2 (rb.velocity.x, rb.velocity.y);
+            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            collision.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+
+
+
         }
     }
 

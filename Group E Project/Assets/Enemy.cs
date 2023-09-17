@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        SoundManager.PlayDevilDamageSoundClip();
+        SoundManager.PlayDevilDeathSoundClip();
         health -= damage;
     }
     public void Knockback(int direction, int playermomentum)

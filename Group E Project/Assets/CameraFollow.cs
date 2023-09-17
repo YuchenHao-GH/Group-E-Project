@@ -25,4 +25,9 @@ public class CameraFollow : MonoBehaviour
     {
         StartCoroutine(FollowTarget());
     }
+
+    public void Test()
+    {
+        target = null;
+    }
 }
