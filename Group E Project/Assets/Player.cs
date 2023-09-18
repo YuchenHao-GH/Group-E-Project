@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             StartCoroutine(DisableHit());
-             Camera.GetComponent<CameraFollow>().enabled = false;
+            //Camera.GetComponent<CameraFollow>().enabled = false;
         }
         else
         {
@@ -83,8 +83,8 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableHit()
     {
-        Camera.GetComponent<CameraFollow>().Test();
-        text.GetComponent<Timer>().Timing = false;
+        //Camera.GetComponent<CameraFollow>().Test();
+        //stext.GetComponent<Timer>().Timing = false;
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(2f);
         Die();
