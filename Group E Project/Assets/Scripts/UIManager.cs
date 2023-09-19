@@ -121,7 +121,7 @@ public class UIManager : MonoBehaviour
 
     public void PlayerDied()
     {
-        Debug.Log("PlayerDied method called");
+        isGameOver = true;
         reloadPanel.SetActive(true);
         activePanel = reloadPanel;
     }
@@ -135,6 +135,7 @@ public class UIManager : MonoBehaviour
 
     private void ResetGameTime()
     {
+        isGameOver = false;
         gameTime = 0f;
         UpdateTimeUI();
     }

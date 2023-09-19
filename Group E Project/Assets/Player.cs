@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
 
     public Camera Camera;
 
+    private UIManager uiManager;
+
     //private TimeRecord timeRecord;
 
     public float tiltSpeed = 20f;
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour
         animationCParameter = new AnimatorControllerParameter[parameters];
 
         //timeRecord = FindObjectOfType<TimeRecord>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     private void Awake()
@@ -76,7 +79,6 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Player died");
             StartCoroutine(DisableHit());
             //Camera.GetComponent<CameraFollow>().enabled = false;
         }
@@ -104,7 +106,7 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
-        UIManager.Instance.PlayerDied();
+        uiManager.PlayerDied();
     }
 
     // Update is called once per frame
