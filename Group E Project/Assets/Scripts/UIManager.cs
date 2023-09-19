@@ -10,20 +10,28 @@ public class UIManager : MonoBehaviour
     public GameObject nextLevelPanel;
     public GameObject gameOverPanel;
     public GameObject reloadPanel;
+
+    private TimeRecord timeRecord;
  
     [SerializeField] private GameObject activePanel;
     static private UIManager instance;
-    static public UIManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                Debug.LogError("There is not UIManager in the scene.");
-            }
-            return instance;
-        }
-    }
+    static public UIManager Instance;
+
+    public Text timeText;
+    private float gameTime = 0f;
+    private bool isGameOver = false;
+
+    //{
+        //get
+        //{
+            //if (instance == null)
+            //{
+                //Debug.LogError("There is not UIManager in the scene.");
+            //}
+            //return instance;
+        //}
+    //}
+
     void Awake()
     {
         if (instance != null)
@@ -46,11 +54,26 @@ public class UIManager : MonoBehaviour
         if (scene.buildIndex == 0)
         {
             // we're on the menu scene, show the start panel
-            
-           
+            startPanel.SetActive(true);
+            activePanel = startPanel;
         }
-    
+        UpdateTimeUI();
+    }
 
+    void Update()
+    {
+        if (!isGameOver)
+        {
+            gameTime += Time.deltaTime;
+            UpdateTimeUI();
+        }
+    }
+
+    void UpdateTimeUI()
+    {
+        int minutes = Mathf.FloorToInt(gameTime / 60f);
+        int seconds = Mathf.FloorToInt(gameTime % 60f);
+        timeText.text = string.Format("Time: {0:00}:{1:00}", minutes, seconds);
     }
 
     public void LevelComplete()
@@ -98,6 +121,7 @@ public class UIManager : MonoBehaviour
 
     public void PlayerDied()
     {
+        Debug.Log("PlayerDied method called");
         reloadPanel.SetActive(true);
         activePanel = reloadPanel;
     }
@@ -106,5 +130,12 @@ public class UIManager : MonoBehaviour
     {
         activePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ResetGameTime(); 
+    }
+
+    private void ResetGameTime()
+    {
+        gameTime = 0f;
+        UpdateTimeUI();
     }
 }
