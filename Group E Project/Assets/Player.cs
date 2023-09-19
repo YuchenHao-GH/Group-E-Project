@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
 
     public Camera Camera;
 
+    //private TimeRecord timeRecord;
+
     public float tiltSpeed = 20f;
     public float maxTiltAngle = 45f;
     private float horizontalInput;
@@ -49,6 +51,8 @@ public class Player : MonoBehaviour
         playerFeet = GetComponent<BoxCollider2D>();
         int parameters = animator.parameterCount;
         animationCParameter = new AnimatorControllerParameter[parameters];
+
+        //timeRecord = FindObjectOfType<TimeRecord>();
     }
 
     private void Awake()
@@ -72,6 +76,7 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            Debug.Log("Player died");
             StartCoroutine(DisableHit());
             //Camera.GetComponent<CameraFollow>().enabled = false;
         }
@@ -295,31 +300,6 @@ public class Player : MonoBehaviour
             }
         }
     
-
-
-    //void SwitchAnimation()
-    //{
-        //if(animator.GetBool("IsJump"))
-        //{
-            //if(rb.velocity.y < 0.0f)
-           //{
-                //while(isGround || isRightRamp)
-                //{
-                    //animator.SetBool("IsFall", false);
-                    //animator.SetBool("IsIdle", true);
-                //}
-                //animator.SetBool("IsJump", false);
-                //animator.SetBool("IsFall", true);
-                //Run();
-            //}
-        //}
-        //else if(isGround || isRightRamp)
-        //{
-            //animator.SetBool("IsFall", false);
-            
-        //}
-    //}
-
     void SwitchAnimation()
     {
         if (animator.GetBool("IsJump"))
@@ -371,10 +351,6 @@ public class Player : MonoBehaviour
         {
           downramped = true;
         }
-        //if (collider.gameObject.tag == "checkpoint")
-        //{
-            //mostrecentcheckpoint = collider.gameObject;
-        //}
         if (collider.gameObject.tag== "ReloadZone")
         {
           
@@ -403,8 +379,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -417,9 +391,6 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2 (rb.velocity.x, rb.velocity.y);
             collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             collision.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
-
-
-
         }
     }
 
