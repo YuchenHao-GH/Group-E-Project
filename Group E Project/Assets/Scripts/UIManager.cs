@@ -11,13 +11,12 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject reloadPanel;
 
-    private TimeRecord timeRecord;
+   
  
     [SerializeField] private GameObject activePanel;
     static private UIManager instance;
     static public UIManager Instance;
 
-    public Text timeText;
     private float gameTime = 0f;
     private bool isGameOver = false;
 
@@ -71,52 +70,20 @@ public class UIManager : MonoBehaviour
 
     void UpdateTimeUI()
     {
-        int minutes = Mathf.FloorToInt(gameTime / 60f);
-        int seconds = Mathf.FloorToInt(gameTime % 60f);
-        timeText.text = string.Format("Time: {0:00}:{1:00}", minutes, seconds);
+        
     }
 
     public void LevelComplete()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        int lastScene = SceneManager.sceneCountInBuildSettings - 1;
-        Debug.Log($"build index = {scene.buildIndex}");
-        Debug.Log($"last scene = {lastScene}");
+        startPanel.SetActive(false);
 
-        if (scene.buildIndex == lastScene)
-        {
-            //we're on the last scene, show the game over panel 
-            gameOverPanel.SetActive(true);
-            activePanel = gameOverPanel;
-        }
-        else
-        {
-            //show the next level panel 
-            nextLevelPanel.SetActive(true) ;
-            activePanel = nextLevelPanel;
-        }
     }
     public void NextScene()
     {
         //hide the panel
-        activePanel.SetActive(false);
+        startPanel.SetActive(false);
         //load the next scene in build order
-        Scene scene = SceneManager.GetActiveScene();
-        int lastScene = SceneManager.sceneCountInBuildSettings - 1;
-        
-        int next;
-        if ((scene.buildIndex == lastScene))
-        {
-            next = 0;
-            // we're returning to the menu scene, show the start panel
-            startPanel.SetActive(true);
-            activePanel = startPanel;
-        }
-        else
-        {
-            next = scene.buildIndex + 1;
-        }
-        SceneManager.LoadScene(next);
+       
     }
 
     public void PlayerDied()
