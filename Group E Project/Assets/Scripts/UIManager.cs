@@ -89,6 +89,7 @@ public class UIManager : MonoBehaviour
     public void PlayerDied()
     {
         isGameOver = true;
+        Time.timeScale = 0f;
         reloadPanel.SetActive(true);
         activePanel = reloadPanel;
     }
@@ -96,8 +97,11 @@ public class UIManager : MonoBehaviour
     public void PlayerReload()
     {
         activePanel.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //Time.timeScale = 1f;
         ResetGameTime(); 
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void ResetGameTime()
