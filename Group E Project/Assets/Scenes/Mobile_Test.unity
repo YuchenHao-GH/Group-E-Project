@@ -20155,17 +20155,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigSnowBall
       objectReference: {fileID: 0}
+    - target: {fileID: 4351772311375713137, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351772311375713137, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351772311375713138, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
+      propertyPath: speed
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351772311375713138, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
+      propertyPath: activationDelay
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4351772311375713139, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4351772311375713139, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.470398
+      value: 77.9
       objectReference: {fileID: 0}
     - target: {fileID: 4351772311375713139, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.74631
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4351772311375713139, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20198,6 +20214,18 @@ PrefabInstance:
     - target: {fileID: 4351772311375713139, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351772311375713140, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351772311375713141, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351772311375713141, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5774fc421d540e4d99f14ee18f59573, type: 3}
