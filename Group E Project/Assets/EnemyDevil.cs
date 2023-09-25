@@ -32,13 +32,13 @@ public class EnemyDevil : Enemy
     // Update is called once per frame
     public void Update()
     {
-        if (player.transform.position.x < transform.position.x) {
-            transform.localScale = new Vector3(-1, 1, 1);
+        //if (player.transform.position.x < transform.position.x) {
+            //transform.localScale = new Vector3(-1, 1, 1);
             
-        }
-        else {
-             transform.localScale = new Vector3(1, 1, 1);
-        }
+        //}
+        //else {
+             //transform.localScale = new Vector3(1, 1, 1);
+        //}
           if(health <= 0)
         {
             disablecollision = true;
