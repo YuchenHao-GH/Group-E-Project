@@ -20,6 +20,7 @@ public class ProceduralGeneration : MonoBehaviour
     public GameObject DeathZone;
     public GameObject Enemy;
     Vector3Int Playerposition;
+    public int count;
     void Start()
     {
         TileBase[] Prefab1Base = Prefab1.GetTilesBlock(Prefab1.cellBounds);
@@ -38,7 +39,8 @@ public class ProceduralGeneration : MonoBehaviour
 
         if (player.transform.position.x >= ChunkLength * ChunkCount)
         {
-            ChunkReader.y = ChunkReader.y + RandomHeight();
+            count = RandomHeight();
+            ChunkReader.y = ChunkReader.y + count;
             ChunkCount++;
             ChunkReader.x = ChunkReader.x + 50;
             switch (RandomNumberGenerator())
@@ -47,7 +49,7 @@ public class ProceduralGeneration : MonoBehaviour
              GroundTilemap.SetTilesBlock(ChunkReader, Prefab1Base);
              GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab1Base);
              Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 70, ChunkReader.y + 42, 0), Quaternion.identity);
-                    ChunkReader.y = ChunkReader.y - 2;
+               
 
                     break;
             case 2:
@@ -58,8 +60,10 @@ public class ProceduralGeneration : MonoBehaviour
             case 3:
              GroundTilemap.SetTilesBlock(ChunkReader, Prefab3Base);
              GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab3Base);
-            
-             ChunkReader.y = ChunkReader.y - 18;
+           
+                        ChunkReader.y = ChunkReader.y - (12 - count);
+                   
+                    
              break;
             case 4:
              GroundTilemap.SetTilesBlock(ChunkReader, Prefab4Base);
@@ -75,7 +79,7 @@ public class ProceduralGeneration : MonoBehaviour
              GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab1Base);
              Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 65, ChunkReader.y + 42, 0), Quaternion.identity);
              Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 80, ChunkReader.y + 42, 0), Quaternion.identity);
-                    ChunkReader.y = ChunkReader.y - 2;
+        
                     break;
             }
 
@@ -98,14 +102,13 @@ public class ProceduralGeneration : MonoBehaviour
     public int RandomNumberGenerator()
     {
     int random = (int) Random.Range(1, 6);
-    Debug.Log(random);
     return random;
 
     }
 
     public int RandomHeight()
     {
-    int random = (int) Random.Range(-2, 3);
+    int random = (int) Random.Range(-2, 0);
     Debug.Log(random);
     return random;
 

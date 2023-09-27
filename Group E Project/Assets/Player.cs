@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     public BoxCollider2D yes;
     public Camera Camera;
     public bool isdead = false;
-
+    public float maxmaxspeed = 30;
     private UIManager uiManager;
 
     //private TimeRecord timeRecord;
@@ -270,6 +270,7 @@ public class Player : MonoBehaviour
         {
              rb.AddForce(transform.right * -1 * 400);
         }
+       
     }
 
     void CheckGrounded()
