@@ -10,6 +10,9 @@ public class FollowPlayer : MonoBehaviour
     private float timeSinceLastUpdate = 0.0f;
     private Vector3 targetPosition;
     private Rigidbody2D rb;
+    public float maxspeed = 15;
+    private Rigidbody2D playerrb;
+    private CircleCollider2D circle;
 
     private bool isActive = false;
     public float activationDelay = 2.0f;
@@ -17,6 +20,8 @@ public class FollowPlayer : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerrb = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        circle = GetComponent<CircleCollider2D>();
         if (player != null)
         {
             targetPosition = player.position;
@@ -37,6 +42,13 @@ public class FollowPlayer : MonoBehaviour
 
     private void Update()
     {
+        //int layer_mask = LayerMask.GetMask("ground");
+        //RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), transform.right, 10f, layer_mask);
+       // if (hit)
+       // {
+         //   rb.AddForce(transform.up * 100000 * Time.deltaTime);
+      //  }
+        InvokeRepeating("AdjustSpeed", 6, 3);
         if (!isActive)
         {
             return;
@@ -52,7 +64,11 @@ public class FollowPlayer : MonoBehaviour
             }
 
             Vector3 direction = (targetPosition - transform.position).normalized;
-            rb.AddForce(direction * speed * Time.deltaTime);
+            if (rb.velocity.x <= maxspeed)
+            {
+                rb.AddForce(direction * speed * Time.deltaTime);
+            }
+
         }
     }
 
@@ -66,12 +82,42 @@ public class FollowPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Player player = collision.gameObject.GetComponent<Player>();
-            if (player != null)
+            if (player != null && player.isdead == false)
             {
+
                 float damage = 20.0f;
                 player.TakeDamage(damage);
-                Destroy(gameObject);
             }
+
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<CapsuleCollider2D>(), circle);
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<BoxCollider2D>(), circle);
+
+        }
+    }
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Enemy"))
+        {
+            collider.GetComponent<Enemy>().TakeDamage(1);
+            collider.GetComponent<Enemy>().Knockback(1, 0);
+
+
+        }
+    }
+    public void AdjustSpeed()
+    {
+        
+        if (player.position.x - transform.position.x > 10 )
+        {
+            maxspeed = playerrb.velocity.x + 3;
+        }
+        maxspeed = playerrb.velocity.x + 1;
+        if (maxspeed <= 10)
+        {
+            maxspeed = 10;
         }
     }
 }

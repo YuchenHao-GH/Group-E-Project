@@ -33,8 +33,9 @@ public class Player : MonoBehaviour
     public float maxRotationAngle = 45f;
     public float rotationSpeed;
     public Tile Ramp;
-
+    public BoxCollider2D yes;
     public Camera Camera;
+    public bool isdead = false;
 
     private UIManager uiManager;
 
@@ -80,6 +81,7 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             StartCoroutine(DisableHit());
+            Camera.GetComponent<CameraFollow>().Test();
             //Camera.GetComponent<CameraFollow>().enabled = false;
         }
         else
@@ -92,6 +94,8 @@ public class Player : MonoBehaviour
     {
         //Camera.GetComponent<CameraFollow>().Test();
         //stext.GetComponent<Timer>().Timing = false;
+        Camera.GetComponent<CameraFollow>().Test();
+        isdead = true;
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(2f);
         Die();
@@ -355,7 +359,7 @@ public class Player : MonoBehaviour
         }
         if (collider.gameObject.tag== "ReloadZone")
         {
-          
+            Camera.GetComponent<CameraFollow>().Test();
             StartCoroutine(DisableHit());
          
         }

@@ -16,6 +16,7 @@ public class EnemyDevil : Enemy
     bool disablecollision = false;
     private CapsuleCollider2D collider1;
     private BoxCollider2D collider2;
+    private Rigidbody2D lol;
     
     // Start is called before the first frame update
     public void Start()
@@ -51,6 +52,7 @@ public class EnemyDevil : Enemy
                
                 Destroy(gameObject);
             }
+
         }
     }
    void OnTriggerEnter2D(Collider2D collider)

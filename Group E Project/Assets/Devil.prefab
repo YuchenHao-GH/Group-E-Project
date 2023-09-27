@@ -235,6 +235,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1494623018266085049, guid: b5a352716082143068708f5241d77ff9, type: 3}
   m_PrefabInstance: {fileID: 7087372915776055274}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &9216728890542234315
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8567710896150880595}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &7087372914735660760
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -333,3 +354,5 @@ MonoBehaviour:
   movePos: {fileID: 7087372915378506003}
   leftDownPos: {fileID: 7087372915389718302}
   rightUpPos: {fileID: 7087372915312668635}
+  player: {fileID: 0}
+  cooldown: 1
