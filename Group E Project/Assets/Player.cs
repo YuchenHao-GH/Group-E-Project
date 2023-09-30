@@ -38,7 +38,9 @@ public class Player : MonoBehaviour
     public bool isdead = false;
     public float maxmaxspeed = 30;
     private UIManager uiManager;
-
+    public float JumpGracePeriod;
+    public float JumpTime;
+    public bool WillJump = true;
     //private TimeRecord timeRecord;
 
     public float tiltSpeed = 20f;
@@ -132,6 +134,7 @@ public class Player : MonoBehaviour
             }
             if (touch.phase == TouchPhase.Began && touch.position.x > Screen.width / 2.0f && touch.position.y < Screen.height / 2.0f)
             {
+                JumpGracePeriod = Time.time;
                 Jump();
             }
            
@@ -196,7 +199,17 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(movingright == true)
+        if ((isGround || isRightRamp) && WillJump == true)
+        {
+            rb.AddForce(Vector2.up * 2500, ForceMode2D.Impulse);
+            animator.SetBool("IsJump", true);
+            animator.SetBool("IsRun", false);
+            animator.SetBool("IsWalk", false);
+            animator.SetBool("IsSliding", false);
+            animator.SetBool("IsIdle", false);
+            WillJump = false;
+        }
+        if (movingright == true)
         {
              float moveDir = 1;
             
@@ -276,6 +289,16 @@ public class Player : MonoBehaviour
     void CheckGrounded()
     {
         isGround = playerFeet.IsTouchingLayers(LayerMask.GetMask("ground"));
+        if (playerFeet.IsTouchingLayers(LayerMask.GetMask("ground")))
+            {
+            JumpTime = Time.time;
+            Debug.Log((float)(JumpTime - JumpGracePeriod) );
+            if ((JumpTime - JumpGracePeriod)  <= 0.3)
+            {
+                WillJump = true;
+            }
+
+        }
         isRightRamp = playerFeet.IsTouchingLayers(LayerMask.GetMask("downramp"));
     }
 
@@ -295,16 +318,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-       
-            if(isGround || isRightRamp)
-            {
-                rb.AddForce(Vector2.up * 2500, ForceMode2D.Impulse);
-                animator.SetBool("IsJump", true);
-                animator.SetBool("IsRun", false);
-                animator.SetBool("IsWalk", false);
-                animator.SetBool("IsSliding", false);
-                animator.SetBool("IsIdle", false);
-            }
+        
         }
     
     void SwitchAnimation()
