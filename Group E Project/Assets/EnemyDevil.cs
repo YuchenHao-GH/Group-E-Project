@@ -45,11 +45,15 @@ public class EnemyDevil : Enemy
             disablecollision = true;
             animator.SetTrigger("Die");
             cooldown-= Time.deltaTime;
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
             collider1.enabled = false;
             collider2.enabled = false;
             if (cooldown < 0)
             {
-               
+                if (scoreManager != null)
+                {
+                    scoreManager.AddScore(50);
+                }
                 Destroy(gameObject);
             }
 
