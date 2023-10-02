@@ -82,6 +82,8 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            scoreManager.StopScore();
             StartCoroutine(DisableHit());
             Camera.GetComponent<CameraFollow>().Test();
             //Camera.GetComponent<CameraFollow>().enabled = false;
@@ -94,6 +96,8 @@ public class Player : MonoBehaviour
 
     IEnumerator DisableHit()
     {
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        scoreManager.StopScore();
         //Camera.GetComponent<CameraFollow>().Test();
         //stext.GetComponent<Timer>().Timing = false;
         Camera.GetComponent<CameraFollow>().Test();
@@ -111,6 +115,8 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        scoreManager.StopScore();
         Destroy(gameObject);
         uiManager.PlayerDied();
     }

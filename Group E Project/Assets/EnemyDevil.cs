@@ -34,26 +34,25 @@ public class EnemyDevil : Enemy
     public void Update()
     {
         //if (player.transform.position.x < transform.position.x) {
-            //transform.localScale = new Vector3(-1, 1, 1);
-            
+        //transform.localScale = new Vector3(-1, 1, 1);
+
         //}
         //else {
-             //transform.localScale = new Vector3(1, 1, 1);
+        //transform.localScale = new Vector3(1, 1, 1);
         //}
-          if(health <= 0)
+       
+        if (health <= 0)
         {
+           
             disablecollision = true;
             animator.SetTrigger("Die");
             cooldown-= Time.deltaTime;
-            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+           
             collider1.enabled = false;
             collider2.enabled = false;
             if (cooldown < 0)
             {
-                if (scoreManager != null)
-                {
-                    scoreManager.AddScore(50);
-                }
+                
                 Destroy(gameObject);
             }
 

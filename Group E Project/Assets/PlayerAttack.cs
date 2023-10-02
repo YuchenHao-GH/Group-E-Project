@@ -69,8 +69,13 @@ public class PlayerAttack : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Enemy"))
+        if(other.gameObject.CompareTag("Enemy") && other.GetType() == typeof(BoxCollider2D))
         {
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager != null)
+            {
+                scoreManager.AddScore(50);
+            }
             Player.AddForce(transform.right * 300, ForceMode2D.Impulse);
             other.GetComponent<Enemy>().TakeDamage(swordDamage);
             other.GetComponent<Enemy>().Knockback(1, 0);
