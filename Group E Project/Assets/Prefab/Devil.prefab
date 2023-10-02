@@ -328,6 +328,29 @@ MonoBehaviour:
   movePos: {fileID: 129830778758058262}
   leftDownPos: {fileID: 129830778871891739}
   rightUpPos: {fileID: 129830778962622430}
+  player: {fileID: 0}
+  cooldown: 1
+--- !u!50 &1932984886135478498
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544936780133054806}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &9196340620073167423 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9102539515988252112, guid: b5a352716082143068708f5241d77ff9, type: 3}

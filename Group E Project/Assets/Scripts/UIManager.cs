@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
-        
+        Time.timeScale = 0f;
         Scene scene = SceneManager.GetActiveScene();
         if (scene.buildIndex == 0)
         {
@@ -82,8 +82,9 @@ public class UIManager : MonoBehaviour
     {
         //hide the panel
         startPanel.SetActive(false);
+        Time.timeScale = 1f;
         //load the next scene in build order
-       
+
     }
 
     public void PlayerDied()
