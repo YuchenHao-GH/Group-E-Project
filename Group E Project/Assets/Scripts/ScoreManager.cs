@@ -3,24 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class ScoreManager : MonoBehaviour
 {
     public Text scoreText;
     private int score = 0;
-    private Text FinalScore;
-    public GameObject lol;
+    public Text FinalScore;
     public GameObject ReloadPanel;
+    private float HighScore; 
+    public Text high;
 
     void Awake()
     {
-      
+      HighScore = PlayerPrefs.GetFloat("HighScore");
     }
 
     void Start()
     {
-        FinalScore = GameObject.FindGameObjectWithTag("FinalText").GetComponent<Text>();
-        lol = GameObject.FindGameObjectWithTag("FinalText");
         ReloadPanel.SetActive(false);
         UpdateScoreText();
         StartCoroutine(IncrementScore());
@@ -61,6 +59,16 @@ public class ScoreManager : MonoBehaviour
     public void StopScore()
     {
         StopAllCoroutines();
+        SetHighScore();
         
+    }
+
+    public void SetHighScore()
+    {
+        if (score > HighScore)
+        {
+            PlayerPrefs.SetFloat("HighScore", score);
+        }
+        high.text = "High Score: " + PlayerPrefs.GetFloat("HighScore").ToString();
     }
 }

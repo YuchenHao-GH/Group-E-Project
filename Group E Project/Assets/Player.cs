@@ -225,6 +225,10 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(transform.right * moveDir * 700);
         }
+        else
+            {
+                rb.AddForce(transform.right * 1);
+            }
          if (moveDir > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);

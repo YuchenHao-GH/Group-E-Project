@@ -41,7 +41,6 @@ public class UIManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
   
 
@@ -49,14 +48,8 @@ public class UIManager : MonoBehaviour
     void Start()
     {
      
-        Time.timeScale = 0f;
         Scene scene = SceneManager.GetActiveScene();
-        if (scene.buildIndex == 0)
-        {
-            // we're on the menu scene, show the start panel
-            startPanel.SetActive(true);
-            activePanel = startPanel;
-        }
+       
         UpdateTimeUI();
     }
 
