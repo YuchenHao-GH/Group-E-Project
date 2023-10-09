@@ -19108,10 +19108,11 @@ MonoBehaviour:
   Prefab2: {fileID: 7147470234166849631, guid: da3804ebc549d3a4a8c623f5599c4ed0, type: 3}
   Prefab3: {fileID: 1630234799510042863, guid: 9a416711a5d70134f806d3051e3064e7, type: 3}
   Prefab4: {fileID: 5172953352161651532, guid: 6f049cd113a42ac478d3a1c39aacd546, type: 3}
+  Prefab6: {fileID: 4810352363937846149, guid: e503a491548daf442b76c290dcde1103, type: 3}
   ChunkReader:
     m_Position: {x: -90, y: -22, z: 0}
-    m_Size: {x: 50, y: 15, z: 1}
-  ChunkLength: 50
+    m_Size: {x: 60, y: 15, z: 1}
+  ChunkLength: 60
   ChunkCount: 0
   player: {fileID: 1961580781}
   DeathZone: {fileID: 2151681692208927914, guid: 123acf94709544f4ab9faa0cfeb29fe0, type: 3}

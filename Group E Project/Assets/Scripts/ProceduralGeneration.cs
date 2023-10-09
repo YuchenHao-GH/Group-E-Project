@@ -13,6 +13,7 @@ public class ProceduralGeneration : MonoBehaviour
     public Tilemap Prefab2;
     public Tilemap Prefab3;
     public Tilemap Prefab4;
+    public Tilemap Prefab6;
     public BoundsInt ChunkReader;
     public int ChunkLength = 50;
     public int ChunkCount = 0;
@@ -26,7 +27,7 @@ public class ProceduralGeneration : MonoBehaviour
         TileBase[] Prefab1Base = Prefab1.GetTilesBlock(Prefab1.cellBounds);
         GroundTilemap.SetTilesBlock(ChunkReader, Prefab1Base);
         GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab1Base);
-        Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 70, ChunkReader.y + 37, 0), Quaternion.identity);
+
     }
 
     // Update is called once per frame
@@ -36,13 +37,14 @@ public class ProceduralGeneration : MonoBehaviour
         TileBase[] Prefab2Base = Prefab2.GetTilesBlock(Prefab2.cellBounds);
         TileBase[] Prefab3Base = Prefab3.GetTilesBlock(Prefab3.cellBounds);
         TileBase[] Prefab4Base = Prefab4.GetTilesBlock(Prefab4.cellBounds);
+        TileBase[] Prefab6Base = Prefab6.GetTilesBlock(Prefab6.cellBounds);
 
         if (player.transform.position.x >= ChunkLength * ChunkCount)
         {
             count = RandomHeight();
             ChunkReader.y = ChunkReader.y + count;
             ChunkCount++;
-            ChunkReader.x = ChunkReader.x + 50;
+            ChunkReader.x = ChunkReader.x + 60;
             switch (RandomNumberGenerator())
             {
             case 1:
@@ -81,7 +83,14 @@ public class ProceduralGeneration : MonoBehaviour
              Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 80, ChunkReader.y + 42, 0), Quaternion.identity);
         
                     break;
+                    case 6:
+             GroundTilemap.SetTilesBlock(ChunkReader, Prefab6Base);
+             GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab6Base);
+             Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 70, ChunkReader.y + 42, 0), Quaternion.identity);
+                    break;
+
             }
+
 
         }
 

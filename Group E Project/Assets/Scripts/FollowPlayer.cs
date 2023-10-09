@@ -112,11 +112,11 @@ public class FollowPlayer : MonoBehaviour
 
         if (player.position.x - transform.position.x > 10)
         {
-            maxspeed = playerrb.velocity.x + 2;
+            maxspeed = playerrb.velocity.x + 1;
         }
         else
         {
-            maxspeed = playerrb.velocity.x + 0.1f;
+            maxspeed = playerrb.velocity.x;
         }
         if (maxspeed <= 10)
         {
