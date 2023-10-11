@@ -14,6 +14,7 @@ public class ProceduralGeneration : MonoBehaviour
     public Tilemap Prefab3;
     public Tilemap Prefab4;
     public Tilemap Prefab6;
+    public Tilemap Prefab7;
     public BoundsInt ChunkReader;
     public int ChunkLength = 50;
     public int ChunkCount = 0;
@@ -38,10 +39,11 @@ public class ProceduralGeneration : MonoBehaviour
         TileBase[] Prefab3Base = Prefab3.GetTilesBlock(Prefab3.cellBounds);
         TileBase[] Prefab4Base = Prefab4.GetTilesBlock(Prefab4.cellBounds);
         TileBase[] Prefab6Base = Prefab6.GetTilesBlock(Prefab6.cellBounds);
+        TileBase[] Prefab7Base = Prefab7.GetTilesBlock(Prefab7.cellBounds);
 
         if (player.transform.position.x >= ChunkLength * ChunkCount)
         {
-            count = RandomHeight();
+            count = 0;
             ChunkReader.y = ChunkReader.y + count;
             ChunkCount++;
             ChunkReader.x = ChunkReader.x + 60;
@@ -63,7 +65,7 @@ public class ProceduralGeneration : MonoBehaviour
              GroundTilemap.SetTilesBlock(ChunkReader, Prefab3Base);
              GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab3Base);
            
-                        ChunkReader.y = ChunkReader.y - (12 - count);
+                        ChunkReader.y = ChunkReader.y - (14 - count);
                    
                     
              break;
@@ -86,7 +88,23 @@ public class ProceduralGeneration : MonoBehaviour
                     case 6:
              GroundTilemap.SetTilesBlock(ChunkReader, Prefab6Base);
              GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab6Base);
-             Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 70, ChunkReader.y + 42, 0), Quaternion.identity);
+                    Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 74, ChunkReader.y + 42, 0), Quaternion.identity);
+                    Instantiate(DeathZone, new Vector3(ChunkCount * ChunkLength + 72, ChunkReader.y + 22, 0), Quaternion.identity);
+                    ChunkReader.y = ChunkReader.y - (10 - count);
+                    break;
+
+                case 7:
+                    GroundTilemap.SetTilesBlock(ChunkReader, Prefab7Base);
+                    GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab7Base);
+                    Instantiate(DeathZone, new Vector3(ChunkCount * ChunkLength + 72, ChunkReader.y + 18, 0), Quaternion.identity);
+                    ChunkReader.y = ChunkReader.y - (14 - count);
+                    break;
+                case 8:
+                    GroundTilemap.SetTilesBlock(ChunkReader, Prefab7Base);
+                    GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab7Base);
+                    Instantiate(DeathZone, new Vector3(ChunkCount * ChunkLength + 72, ChunkReader.y + 18, 0), Quaternion.identity);
+                    Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 100, ChunkReader.y + 28f, 0), Quaternion.identity);
+                    ChunkReader.y = ChunkReader.y - (14 - count);
                     break;
 
             }
@@ -110,7 +128,7 @@ public class ProceduralGeneration : MonoBehaviour
 
     public int RandomNumberGenerator()
     {
-    int random = (int) Random.Range(1, 6);
+    int random = (int) Random.Range(1, 9);
     return random;
 
     }

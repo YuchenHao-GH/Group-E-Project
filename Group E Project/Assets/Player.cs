@@ -225,9 +225,9 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(transform.right * moveDir * 700);
         }
-        else
+        else 
             {
-                rb.AddForce(transform.right * 1);
+                
             }
          if (moveDir > 0)
         {

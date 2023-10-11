@@ -44,10 +44,11 @@ public class FollowPlayer : MonoBehaviour
     {
         //int layer_mask = LayerMask.GetMask("ground");
         //RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), transform.right, 10f, layer_mask);
-       // if (hit)
-       // {
-         //   rb.AddForce(transform.up * 100000 * Time.deltaTime);
-      //  }
+        // if (hit)
+        // {
+        //   rb.AddForce(transform.up * 100000 * Time.deltaTime);
+        //  }
+        transform.Rotate(Vector3.forward * -8);
         InvokeRepeating("AdjustSpeed", 6, 3);
         if (!isActive)
         {
@@ -112,7 +113,7 @@ public class FollowPlayer : MonoBehaviour
 
         if (player.position.x - transform.position.x > 10)
         {
-            maxspeed = playerrb.velocity.x + 1;
+            maxspeed = playerrb.velocity.x;
         }
         else
         {
