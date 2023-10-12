@@ -223,7 +223,7 @@ public class Player : MonoBehaviour
         bool plyerHasXAxisSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         if(rb.velocity.magnitude <= maxspeed)
         {
-            rb.AddForce(transform.right * moveDir * 700);
+            rb.AddForce(transform.right * moveDir * 800);
         }
         else 
             {
