@@ -23162,6 +23162,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1485368833}
     - target: {fileID: 450515042, guid: be43ed196b7b50b49a3f8b3103242edb, type: 3}
+      propertyPath: WillJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450515042, guid: be43ed196b7b50b49a3f8b3103242edb, type: 3}
       propertyPath: UIManager
       value: 
       objectReference: {fileID: 2062881941}

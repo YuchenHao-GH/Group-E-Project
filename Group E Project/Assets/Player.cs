@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     private UIManager uiManager;
     public float JumpGracePeriod;
     public float JumpTime;
-    public bool WillJump = false;
+    public bool WillJump;
     //private TimeRecord timeRecord;
 
     public float tiltSpeed = 20f;
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(Time.time);
         Input.multiTouchEnabled = true; 
         float fingercount = 0;
        
@@ -312,7 +312,7 @@ public class Player : MonoBehaviour
             {
             JumpTime = Time.time;
             Debug.Log((float)(JumpTime - JumpGracePeriod) );
-            if ((JumpTime - JumpGracePeriod)  <= 0.3 && Time.time > 0.3)
+            if ((JumpTime - JumpGracePeriod)  <= 0.3 && Time.time > 1.0)
             {
                 WillJump = true;
             }
