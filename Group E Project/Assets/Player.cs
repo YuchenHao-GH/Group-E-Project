@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     private UIManager uiManager;
     public float JumpGracePeriod;
     public float JumpTime;
-    public bool WillJump = true;
+    public bool WillJump = false;
     //private TimeRecord timeRecord;
 
     public float tiltSpeed = 20f;
