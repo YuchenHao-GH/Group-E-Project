@@ -64,6 +64,9 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         currentHealth = startingHealth;
+        Screen.autorotateToLandscapeLeft = false;
+
+        Screen.autorotateToLandscapeRight = false;
     }
 
     public void Test(bool lol)
@@ -75,6 +78,8 @@ public class Player : MonoBehaviour
     {
         movingleft = lol;
     }
+
+   
     public void TakeDamage(float damage)
     {
         animator.SetTrigger("IsHit");
@@ -119,6 +124,9 @@ public class Player : MonoBehaviour
         scoreManager.StopScore();
         Destroy(gameObject);
         uiManager.PlayerDied();
+        Screen.autorotateToLandscapeLeft = true;
+
+        Screen.autorotateToLandscapeRight = true;
     }
 
     // Update is called once per frame
@@ -187,6 +195,7 @@ public class Player : MonoBehaviour
         RaycastHit2D test = Physics2D.Raycast(transform.position, Vector2.down, 2, mask);
        
 
+        
         if (test.collider!= null)
         {
             grounded = true;
