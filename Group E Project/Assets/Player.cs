@@ -312,7 +312,7 @@ public class Player : MonoBehaviour
             {
             JumpTime = Time.time;
             Debug.Log((float)(JumpTime - JumpGracePeriod) );
-            if ((JumpTime - JumpGracePeriod)  <= 0.3)
+            if ((JumpTime - JumpGracePeriod)  <= 0.3 && Time.time > 0.3)
             {
                 WillJump = true;
             }

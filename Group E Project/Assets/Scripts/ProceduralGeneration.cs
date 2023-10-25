@@ -131,7 +131,7 @@ public class ProceduralGeneration : MonoBehaviour
                     GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab2Base);
                     Instantiate(DeathZone, new Vector3(ChunkCount * ChunkLength + 65, ChunkReader.y + 29, 0), Quaternion.identity);
                     Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 45, ChunkReader.y + 42, 0), Quaternion.identity);
-                    Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 57, ChunkReader.y + 42, 0), Quaternion.identity);
+                   
                     Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 70, ChunkReader.y + 42, 0), Quaternion.identity);
                     break;
                 case 13:
@@ -154,9 +154,9 @@ public class ProceduralGeneration : MonoBehaviour
                     GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab2Base);
                     Instantiate(DeathZone, new Vector3(ChunkCount * ChunkLength + 65, ChunkReader.y + 29, 0), Quaternion.identity);
                     Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 45, ChunkReader.y + 42, 0), Quaternion.identity);
-                    Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 57, ChunkReader.y + 42, 0), Quaternion.identity);
+        
                     Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 70, ChunkReader.y + 42, 0), Quaternion.identity);
-                    Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 98, ChunkReader.y + 42, 0), Quaternion.identity);
+         
                     break;
                 case 16:
                     GroundTilemap.SetTilesBlock(ChunkReader, Prefab3Base);
@@ -176,7 +176,7 @@ public class ProceduralGeneration : MonoBehaviour
                     GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab3Base);
                     Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 50, ChunkReader.y + 42, 0), Quaternion.identity);
                     Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 65, ChunkReader.y + 42, 0), Quaternion.identity);
-                    Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 80, ChunkReader.y + 42, 0), Quaternion.identity);
+                 
                     ChunkReader.y = ChunkReader.y - (14 - count);
                     break;
                 case 19:
@@ -200,7 +200,7 @@ public class ProceduralGeneration : MonoBehaviour
                     Instantiate(DeathZone, new Vector3(ChunkCount * ChunkLength + 55, ChunkReader.y + 29, 0), Quaternion.identity);
                     Instantiate(DeathZone, new Vector3(ChunkCount * ChunkLength + 75, ChunkReader.y + 29, 0), Quaternion.identity);
                     Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 45, ChunkReader.y + 42, 0), Quaternion.identity);
-                    Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 55, ChunkReader.y + 42, 0), Quaternion.identity);
+                
                     Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 63, ChunkReader.y + 42, 0), Quaternion.identity);
                     break;
                 case 22:
@@ -231,7 +231,7 @@ public class ProceduralGeneration : MonoBehaviour
                     GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab6Base);
                     Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 47, ChunkReader.y + 42, 0), Quaternion.identity);
                     
-                    Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 70, ChunkReader.y + 32, 0), Quaternion.identity);
+                    
                     Instantiate(DeathZone, new Vector3(ChunkCount * ChunkLength + 72, ChunkReader.y + 22, 0), Quaternion.identity);
                     ChunkReader.y = ChunkReader.y - (10 - count);
                     break;
@@ -239,7 +239,7 @@ public class ProceduralGeneration : MonoBehaviour
                     GroundTilemap.SetTilesBlock(ChunkReader, Prefab6Base);
                     GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab6Base);
                     Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 47, ChunkReader.y + 42, 0), Quaternion.identity);
-                    Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 70, ChunkReader.y + 32, 0), Quaternion.identity);
+                   
                     Instantiate(DeathZone, new Vector3(ChunkCount * ChunkLength + 72, ChunkReader.y + 22, 0), Quaternion.identity);
                     ChunkReader.y = ChunkReader.y - (10 - count);
                     break;
@@ -247,7 +247,7 @@ public class ProceduralGeneration : MonoBehaviour
                     GroundTilemap.SetTilesBlock(ChunkReader, Prefab6Base);
                     GroundColliderTilemap.SetTilesBlock(ChunkReader, Prefab6Base);
                    
-                    Instantiate(Enemy, new Vector3(ChunkCount * ChunkLength + 70, ChunkReader.y + 32, 0), Quaternion.identity);
+      
                     Instantiate(DeathZone, new Vector3(ChunkCount * ChunkLength + 72, ChunkReader.y + 22, 0), Quaternion.identity);
                     ChunkReader.y = ChunkReader.y - (10 - count);
                     break;
