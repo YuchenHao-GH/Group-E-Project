@@ -8,9 +8,9 @@ public class VolumeSlider : MonoBehaviour
 
     private void Awake()
     {
-        Volume = PlayerPrefs.GetFloat("Volume", 1.0f);
+        Volume = PlayerPrefs.GetFloat("Volume", 1);
         volumeSlider.onValueChanged.AddListener(ChangeVolume);
-        volumeSlider.value = Volume;
+        ChangeVolume(Volume);
 
 
     }

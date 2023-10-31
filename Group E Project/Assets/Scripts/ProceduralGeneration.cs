@@ -287,6 +287,10 @@ public class ProceduralGeneration : MonoBehaviour
 
     public int RandomNumberGenerator()
     {
+        if (Time.time <= 30)
+        {
+            return (int)Random.Range(1, 8);
+        }
     int random = (int) Random.Range(1, 30);
     return random;
 
